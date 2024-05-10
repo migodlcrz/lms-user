@@ -9,7 +9,7 @@ import React, {
 
 interface AuthState {
   user: any;
-  isLoading: boolean; // Add isLoading state
+  isLoading: boolean;
 }
 
 interface AuthAction {
@@ -19,7 +19,7 @@ interface AuthAction {
 
 interface AuthContextProps {
   user: any;
-  isLoading: boolean; // Add isLoading state
+  isLoading: boolean;
   dispatch: React.Dispatch<AuthAction>;
 }
 
@@ -33,14 +33,14 @@ const authReducer = (state: AuthState, action: AuthAction) => {
       return {
         ...state,
         user: action.payload,
-        isLoading: false, // Set isLoading to false after login
+        isLoading: false,
       };
 
     case "LOGOUT":
       return {
         ...state,
         user: null,
-        isLoading: false, // Set isLoading to false after logout
+        isLoading: false,
       };
 
     default:
@@ -57,7 +57,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
 }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
-    isLoading: true, // Initialize isLoading to true
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     if (user) {
       dispatch({ type: "LOGIN", payload: user });
     } else {
-      dispatch({ type: "LOGOUT" }); // If there's no user, set isLoading to false
+      dispatch({ type: "LOGOUT" });
     }
   }, []);
 
@@ -79,7 +79,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       {state.isLoading ? (
         <div className="grid w-full h-screen place-items-center">
           <p className="text-black font-bold text-2xl">Loading...</p>
-        </div> // Render loading indicator while fetching user data
+        </div> //
       ) : (
         children
       )}
