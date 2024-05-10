@@ -51,18 +51,18 @@ const LoginForm = () => {
   return (
     <div className="Login">
       <div className="grid place-items-center h-screen bg-cream">
-        <div className="bg-white shadow-lg p-5 min-w-[60%] border-t-4 border-harvest_gold">
+        <div className="bg-white shadow-lg p-5 min-w-80 border-t-4 border-harvest_gold m-10">
           <div className="flex flex-row ">
             <button
               onClick={() => {
                 navigate("/");
               }}
-              className="text-4xl text-harvest_gold hover:text-cerulean-300
+              className="text-3xl lg:text-4xl text-harvest_gold hover:text-cerulean-300
           "
             >
               <MdKeyboardArrowLeft />
             </button>
-            <h1 className="text-xl font-bold my-4 text-center text-black">
+            <h1 className="text-sm lg:text-xl font-bold my-4 text-center text-black">
               Login
             </h1>
           </div>
@@ -70,7 +70,7 @@ const LoginForm = () => {
             <input
               type="text"
               placeholder="Email"
-              className="input-md"
+              className="input-md border-harvest_gold border-[0.5px]"
               data-testid=""
               value={loginForm.email}
               onChange={(e) => {
@@ -80,7 +80,7 @@ const LoginForm = () => {
             <input
               type={seePassword ? "text" : "password"}
               placeholder="Password"
-              className="input-md"
+              className="input-md border-harvest_gold border-[0.5px]"
               data-testid=""
               value={loginForm.password}
               onChange={(e) => {
@@ -107,7 +107,9 @@ const LoginForm = () => {
               {loading ? (
                 <span className="loading loading-spinner loading-sm" />
               ) : (
-                <span className="text-black font-bold">Login</span>
+                <span className="text-xs lg:text-md text-black font-bold">
+                  Login
+                </span>
               )}
             </button>
           </form>
@@ -137,7 +139,7 @@ const LoginForm = () => {
               }}
             />
           </div>
-          <div className="w-full text-center">
+          <div className="w-full text-center text-sm lg;text-md">
             <a className="text-sm mt-3 text-center" href={"/register"}>
               {"Don't have an account?"}{" "}
               <span className="text-cerulean hover:text-emerald-500">

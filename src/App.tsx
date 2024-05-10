@@ -5,7 +5,6 @@ import {
   Route,
   useLocation,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { ToastContainer } from "react-toastify";
@@ -17,6 +16,8 @@ import DashboardPage from "./pages/DashboardPage";
 import Sidebar from "./components/SideBar";
 import NotLoggedIn from "./components/NotLoggedIn";
 import SettingsPage from "./pages/SettingsPage";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function AppContent() {
   const { user } = useAuthContext();
 
   const hideSidebarOnPages = ["/", "/login", "/register", "/no-access"];
-  const shouldRenderSidebar = !hideSidebarOnPages.includes(location.pathname);
+  const shouldRenderSidebar =
+    !hideSidebarOnPages.includes(location.pathname) ||
+    "*".includes(location.pathname);
 
   return (
     <div>
@@ -50,6 +53,8 @@ function AppContent() {
           element={user ? <SettingsPage /> : <Navigate to="/no-access" />}
         />
         <Route path="/no-access" element={<NotLoggedIn />} />
+        {/* Add a wildcard route for unmatched paths */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

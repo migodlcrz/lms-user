@@ -12,20 +12,20 @@ const Sidebar = () => {
   return (
     <div
       className={`flex h-screen items-end transition-all duration-300 ${
-        isHovered ? "w-[280px]" : "w-[80px]"
+        isHovered ? "w-[280px]" : "w-[12%] lg:w-[80px]"
       } bg-cerulean shadow-xl shadow-black overflow-hidden fixed top-0 z-50 h-full`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="">
-        <ul className="flex flex-col ">
+        <ul className="flex flex-col items-center justify-center">
           <div
             onClick={() => {
               navigate("/courses");
             }}
             className="flex flex-row items-center space-x-4 p-5  w-screen hover:bg-cerulean-300"
           >
-            <li className="grid place-items-center py-2 text-white h-12 text-4xl relative">
+            <li className="grid place-items-center py-2 text-white h-12 text-lg lg:text-4xl relative">
               <MdOutlineLibraryBooks />
             </li>
             <p
@@ -42,7 +42,7 @@ const Sidebar = () => {
             }}
             className="flex flex-row items-center space-x-4 p-5 w-screen hover:bg-cerulean-300"
           >
-            <li className="grid place-items-center py-2 text-white h-12 text-4xl relative">
+            <li className="grid place-items-center py-2 text-white h-12  text-lg lg:text-4xl relative">
               <PiStudentBold />
             </li>
             <p
@@ -59,7 +59,7 @@ const Sidebar = () => {
             }}
             className="flex flex-row items-center space-x-4 p-5 w-screen hover:bg-cerulean-300"
           >
-            <li className="grid place-items-center py-2 text-white h-12 text-4xl relative">
+            <li className="grid place-items-center py-2 text-white h-12  text-lg lg:text-4xl relative">
               <MdOutlineSpaceDashboard />
             </li>
             <p
@@ -76,7 +76,7 @@ const Sidebar = () => {
             }}
             className=" flex flex-row items-center space-x-4 p-5 hover:bg-cerulean-300 w-screen shadow-black shadow-md"
           >
-            <li className="grid place-items-center py-2 text-white h-12 text-4xl relative">
+            <li className="grid place-items-center py-2 text-white h-12  text-lg lg:text-4xl relative">
               <CgProfile />
             </li>
             <p
