@@ -5,7 +5,6 @@ import React, {
   createContext,
   ReactNode,
   useEffect,
-  useState,
 } from "react";
 
 interface AuthState {
