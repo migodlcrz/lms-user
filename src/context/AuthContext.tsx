@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import React, {
   FC,
   useReducer,
@@ -65,9 +66,29 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       localStorage.getItem("user") || "null"
     );
 
-    if (user) {
-      dispatch({ type: "LOGIN", payload: user });
-    } else {
+    const token: string | null = JSON.parse(
+      localStorage.getItem("token") || "null"
+    );
+
+    if (!user || !token) {
+      dispatch({ type: "LOGOUT" });
+    }
+
+    try {
+      const decodedToken: any = jwtDecode(token!);
+
+      // checkToken();
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        dispatch({ type: "LOGOUT" });
+      } else {
+        console.log("PAYLOAD: ", user);
+        dispatch({ type: "LOGIN", payload: user });
+      }
+    } catch (error) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       dispatch({ type: "LOGOUT" });
     }
   }, []);

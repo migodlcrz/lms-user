@@ -6,6 +6,7 @@ export const useLogout = () => {
   const { dispatch } = useAuthContext();
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("token");
     navigate("/");
     dispatch({ type: "LOGOUT" });
   };

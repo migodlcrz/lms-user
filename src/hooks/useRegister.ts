@@ -22,20 +22,24 @@ export const useSignUp = () => {
       token: token,
     };
 
-    const response = await fetch("http://localhost:4000/api/user/register", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(bodyData),
-    });
+    const response = await fetch(
+      "http://localhost:4000/api/user/register/google",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(bodyData),
+      }
+    );
 
     const json = await response.json();
 
     if (response.ok) {
+      toast.success(json.message);
       localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "LOGIN", payload: json });
-      navigate("/dashboard");
+      navigate("/login");
     }
 
     if (!response.ok) {

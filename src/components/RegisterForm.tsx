@@ -2,7 +2,7 @@ import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import { useSignUp } from "../hooks/useSignUp";
+import { useSignUp } from "../hooks/useRegister";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 

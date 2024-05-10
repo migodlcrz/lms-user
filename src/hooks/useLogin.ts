@@ -31,7 +31,9 @@ export const useLogin = () => {
 
     if (response.ok) {
       localStorage.setItem("user", JSON.stringify(json));
+      localStorage.setItem("token", JSON.stringify(json.token));
 
+      toast.success(json.message);
       dispatch({ type: "LOGIN", payload: json });
       navigate("/dashboard");
     }
