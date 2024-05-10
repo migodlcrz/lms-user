@@ -66,7 +66,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     );
 
     const token: string | null = JSON.parse(
-      localStorage.getItem("token") || "null"
+      localStorage.getItem("user-token") || "null"
     );
 
     if (!user || !token) {
