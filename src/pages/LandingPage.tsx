@@ -8,6 +8,7 @@ import dmitri from "../images/dmitri.png";
 import noriel from "../images/noriel.png";
 import guy from "../images/guy.png";
 import guy2 from "../images/guy2.png";
+import { motion } from "framer-motion";
 
 const LandingInfo = () => {
   const navigate = useNavigate();
@@ -31,14 +32,16 @@ const LandingInfo = () => {
             Aldus PageMaker including versions of Lorem Ipsum.
           </p>
           <div>
-            <button
-              onClick={() => navigate("/register")}
-              className="btn bg-cerulean rounded-none hover:bg-cerulean-300 shadow-md shadow-black border-cerulean"
-            >
-              <p className="text-white font-bold text-md lg:text-xl">
-                Start Now
-              </p>
-            </button>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
+              <button
+                onClick={() => navigate("/register")}
+                className="btn bg-cerulean rounded-none hover:bg-cerulean-300 shadow-md shadow-black border-cerulean"
+              >
+                <p className="text-white font-bold text-md lg:text-xl">
+                  Start Now
+                </p>
+              </button>
+            </motion.div>
           </div>
         </div>
         <div className="w-1/3 hidden lg:block">
