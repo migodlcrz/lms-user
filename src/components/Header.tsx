@@ -1,17 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../images/learnify.png";
+import logo from "../images/learnify-green.png";
 import { motion } from "framer-motion";
 
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div className="navbar w-full p-8 lg:p-10 h-20 bg-cream">
+    <div
+      className="navbar w-full p-8 lg:p-3 h-20 fixed top-0 z-50"
+      style={{ backgroundColor: "transparent" }}
+    >
       <h1 className="flex-1 font-bold text-black text-3xl">
         <img src={logo} alt="Loading" width="50" height="50" />
         Learnify
       </h1>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1 space-x-1">
+        <ul className="menu menu-horizontal px-2 space-x-1">
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
             <li className="rounded-none">
               <button
@@ -20,7 +23,7 @@ const Header = () => {
                 }}
                 className="grid place-item-center font-bold rounded-none"
               >
-                <h3 className="text-black font-bold text-xs lg:text-lg">
+                <h3 className="text-white font-bold text-xs lg:text-lg">
                   Sign In
                 </h3>
               </button>
@@ -28,12 +31,12 @@ const Header = () => {
           </motion.div>
 
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
-            <li className="bg-harvest_gold">
+            <li className="bg-gradient-to-b from-caribbean-500 to-caribbean-600 rounded-xl">
               <button
                 onClick={() => {
                   navigate("/register");
                 }}
-                className="grid place-item-center font-bold rounded-none"
+                className="grid place-item-center font-bold rounded-xl"
               >
                 <h3 className="font-bold text-black text-xs lg:text-lg">
                   Register
