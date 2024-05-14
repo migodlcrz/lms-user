@@ -39,18 +39,45 @@ function AppContent() {
   return (
     <div>
       <ToastContainer />
-      {shouldRenderSidebar && <Sidebar />}
+      {/* {shouldRenderSidebar && <Sidebar />} */}
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/"
+          element={!user ? <LandingPage /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/login"
+          element={!user ? <LoginPage /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/register"
+          element={!user ? <RegisterPage /> : <Navigate to="/dashboard" />}
+        />
         <Route
           path="/dashboard"
-          element={user ? <DashboardPage /> : <Navigate to="/no-access" />}
+          element={
+            user ? (
+              <div className="flex flex-row">
+                <Sidebar />
+                <DashboardPage />
+              </div>
+            ) : (
+              <Navigate to="/no-access" />
+            )
+          }
         />
         <Route
           path="/settings"
-          element={user ? <SettingsPage /> : <Navigate to="/no-access" />}
+          element={
+            user ? (
+              <div className="flex flex-row">
+                <Sidebar />
+                <SettingsPage />
+              </div>
+            ) : (
+              <Navigate to="/no-access" />
+            )
+          }
         />
         <Route path="/no-access" element={<NotLoggedIn />} />
         {/* Add a wildcard route for unmatched paths */}
