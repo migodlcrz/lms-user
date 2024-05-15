@@ -55,7 +55,7 @@ const LandingInfo = () => {
                 >
                   <button
                     onClick={() => navigate("/register")}
-                    className="btn bg-caribbean bg-gradient-to-b from-caribbean-500 to-caribbean-600 hover:bg-caribbean-300 shadow-md shadow-black border-cerulean"
+                    className="btn bg-gradient-to-b from-caribbean-500 to-caribbean-600 hover:bg-caribbean-300 shadow-md shadow-black border-cerulean"
                   >
                     <p className="text-black font-bold text-md lg:text-xl">
                       Start Now
@@ -66,35 +66,29 @@ const LandingInfo = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center items-center h-1/5 w-full bg-caribbean-200 ">
+        <div className="flex flex-row justify-center items-center h-1/5 w-full bg-gradient-to-r from-caribbean-500 to-caribbean-700">
           <div className="flex flex-col items-center justify-evenly w-full h-full">
             <h2 className="text-xl font-bold text-black">
               Powered by collaboration with
             </h2>
-            <div className="flex flex-row w-full justify-center items-center space-x-12 text-caribbean-900 text-2xl">
+            <div className="flex flex-row w-full justify-center items-center space-x-12 text-caribbean-900 text-3xl">
               <span className="">
                 <SlSocialFacebook />
-                {/* <p className="text-lg">facebook</p> */}
               </span>
               <span className="">
                 <SlSocialGoogle />
-                {/* <p className="text-lg">google</p> */}
               </span>
               <span className="">
                 <SlSocialGithub />
-                {/* <p className="text-lg">github</p> */}
               </span>
               <span className="">
                 <SlSocialLinkedin />
-                {/* <p className="text-lg">linkedin</p> */}
               </span>
               <span className="">
                 <SlSocialTwitter />
-                {/* <p className="text-lg">twitter</p> */}
               </span>
               <span className="">
                 <SlSocialSpotify />
-                {/* <p className="text-lg">spotify</p> */}
               </span>
             </div>
           </div>
@@ -124,7 +118,10 @@ const LandingInfo = () => {
         </div> */}
         </div>
       </div>
-      <div className="flex flex-col h-screen overflow-hidden bg-caribbean-200"></div>
+      <div className="flex flex-col h-screen overflow-hidden bg-white relative">
+        <div className="flex h-1/2 bg-white"></div>
+        <div className="flex h-1/2 bg-gradient-to-r from-caribbean-500 to-caribbean-700"></div>
+      </div>
     </>
   );
 };

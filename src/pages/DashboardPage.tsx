@@ -30,7 +30,7 @@ const DashboardPage = () => {
                 <Lottie animationData={animation} className="mb-20" />
               </div>
             </div>
-            <div className="flex flex-col h-full bg-white rounded-xl shadow-md p-3">
+            <div className="flex flex-col h-full bg-white rounded-xl shadow-md p-3 space-y-4">
               <div className="flex flex-row items-center w-full ">
                 <h2 className="font-bold text-black text-3xl border-r-2 border-black pr-3 mr-3">
                   Course Progress

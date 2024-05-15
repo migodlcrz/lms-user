@@ -2,13 +2,12 @@
 import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 // import { useLogin } from "../hooks/useLogin";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { useGoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
-import { jwtDecode } from "jwt-decode";
+import { FcGoogle } from "react-icons/fc";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
-import { FcGoogle } from "react-icons/fc";
 
 interface LogForm {
   email: string;
@@ -41,6 +40,7 @@ const LoginForm = () => {
     try {
       console.log("HELLo");
       await login(loginForm);
+      clearForm();
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -62,7 +62,6 @@ const LoginForm = () => {
 
         const json = await res.json();
 
-        console.log(typeof json.email);
         googleLogin(json.email);
       } catch (error) {
         console.log(error);
