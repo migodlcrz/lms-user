@@ -8,7 +8,11 @@ import dmitri from "../images/dmitri.png";
 import noriel from "../images/noriel.png";
 import guy from "../images/guy.png";
 import guy2 from "../images/guy2.png";
+import patterned from "../images/patterned-background.svg";
 import { motion } from "framer-motion";
+import book from "../images/book-icon.json";
+import savings from "../images/savings-icon.json";
+import time from "../images/time-icon.json";
 import heroimage from "../images/hero-image.jpg";
 import {
   SlSocialFacebook,
@@ -122,17 +126,59 @@ const LandingInfo = () => {
         <div className="flex h-1/4 bg-white relative p-2">
           <div className=" flex flex-row space-x-6 absolute w-[95%] h-full bottom-0 left-1/2 translate-y-[15%] translate-x-[-50%]">
             <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
-              <div className="h-full w-1/4">icon</div>
-              <div className="flex flex-col h-full w-3/4">
-                <h2>hello</h2>
-                <h3>asdjioasd asdha uadaa huiasdhuais haisu h</h3>
+              <div className="flex justify-center h-full w-1/4 p-2">
+                <h2>
+                  <Lottie animationData={book} className="w-full h-full" />
+                </h2>
+              </div>
+              <div className="flex flex-col justify-center h-full w-3/4">
+                <h2 className="text-lg font-bold">
+                  Explore a World of Knowledge
+                </h2>
+                <p className="text-black text-sm text-justify">
+                  With our diverse courses, there's always something new to
+                  discover, whether you're a beginner or expert.
+                </p>
               </div>
             </div>
-            <div className="bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl"></div>
-            <div className="bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl"></div>
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+              <div className="flex justify-center h-full w-1/4 p-2">
+                <h2>
+                  <Lottie animationData={savings} className="w-full h-full" />
+                </h2>
+              </div>
+              <div className="flex flex-col justify-center h-full w-3/4">
+                <h2 className="text-lg font-bold">
+                  Quality Education, Affordable Prices
+                </h2>
+                <p className="text-black text-sm text-justify">
+                  Access our extensive course catalog without breaking the bank,
+                  making learning accessible to all.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+              <div className="flex justify-center h-full w-1/4 p-2">
+                <h2>
+                  <Lottie animationData={time} className="w-full h-full" />
+                </h2>
+              </div>
+              <div className="flex flex-col justify-center h-full w-3/4">
+                <h2 className="text-lg font-bold">Learning Without Limits</h2>
+                <p className="text-black text-sm text-justify">
+                  Study on your terms—morning, afternoon, or night. Our flexible
+                  approach fits learning seamlessly into your life.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex h-3/4 bg-gradient-to-r from-caribbean-500 to-caribbean-700"></div>
+        <div className="flex flex-col items-center justify-start pt-14 h-3/4 bg-gradient-to-r from-caribbean-500 to-caribbean-700">
+          <div>
+            <h1 className="font-semibold text-black">Popular Courses</h1>
+          </div>
+          <div></div>
+        </div>
       </div>
     </>
   );
