@@ -143,8 +143,8 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col h-full w-1/3 py-4">
-            <div className="bg-white shadow-md h-full w-full rounded-xl">
+          <div className="h-full w-1/3 py-4">
+            <div className="flex flex-col bg-white shadow-md h-full w-full rounded-xl p-4">
               <div>Lagay mo profile pic nila dito sheesh</div>
             </div>
           </div>
