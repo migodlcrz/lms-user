@@ -11,35 +11,32 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
-  const googleLogin = async (name: string, email: string, token: string) => {
-    const bodyData = {
-      name: name,
-      email: email,
-      token: token,
-    };
+  const googleLogin = async (email: string) => {
+    try {
+      const response = await fetch(
+        "http://localhost:4000/api/user/login/google",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }), // Correctly formatted JSON object
+        }
+      );
 
-    const response = await fetch(
-      "http://localhost:4000/api/user/login/google",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(bodyData),
+      const json = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("user", JSON.stringify(json));
+        localStorage.setItem("user-token", JSON.stringify(json.token));
+
+        toast.success(json.message);
+        dispatch({ type: "LOGIN", payload: json });
+        navigate("/dashboard");
+      } else {
+        toast.error(json.error);
       }
-    );
-
-    const json = await response.json();
-
-    if (response.ok) {
-      localStorage.setItem("user", JSON.stringify(json));
-      localStorage.setItem("user-token", JSON.stringify(json.token));
-
-      toast.success(json.message);
-      dispatch({ type: "LOGIN", payload: json });
-      navigate("/dashboard");
-    }
-
-    if (!response.ok) {
-      toast.error(json.error);
+    } catch (error) {
+      toast.error("An error occurred while logging in.");
+      console.error("Login error:", error);
     }
   };
 

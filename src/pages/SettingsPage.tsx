@@ -7,8 +7,8 @@ const SettingsPage = () => {
   const { logout } = useLogout();
   return (
     <div className="flex flex-col space-y-2 bg-white h-screen w-full p-10">
-      <div>Name: {user.name}</div>
-      <div>Email: {user.email}</div>
+      <div>Name: {user.user_.name}</div>
+      <div>Email: {user.user_.email}</div>
       <button
         onClick={() => {
           logout();
