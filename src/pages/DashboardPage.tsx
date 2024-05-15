@@ -66,18 +66,21 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
-      <div className="flex flex-col h-full bg-gray-50 z-0 p-6">
-        <div className="flex-flex-col w-full">
-          <h1 className="text-black text-4xl">
-            Good Day,{" "}
-            <span className="text-caribbean-600">{user.user_.name}</span>
-          </h1>
-          <h3 className="text-gray-500 font-normal text-sm">
-            Here is your profile overview
-          </h3>
-        </div>
-        <div className="flex flex-row h-full w-full">
-          <div className="flex flex-col h-full w-2/3 py-4 pr-6 space-y-6">
+      <div className="flex flex-row h-full bg-gray-50 z-0 p-6">
+        <div className="w-2/3">
+          {/* Good day */}
+          <div className="flex flex-col w-full h-[10%]">
+            <h1 className="text-black text-4xl">
+              Good Day,{" "}
+              <span className="text-caribbean-600">{user.user_.firstName}</span>
+            </h1>
+            <h3 className="text-gray-500 font-normal text-sm">
+              Here is your profile overview
+            </h3>
+          </div>
+          {/* <div className="flex-grow bg-yellow-400 h-[90%]">hello</div> */}
+          {/* Course progress */}
+          <div className="flex flex-col h-[90%] w-full pr-6 space-y-6">
             <div className="flex flex-row h-28 bg-gradient-to-l items-center shadow-md from-caribbean-500 via-caribbean-700 to-caribbean-900 rounded-xl py-3 px-7">
               <p className="text-caribbean-50 font-bold w-4/5 text-xs md:text-xl">
                 You are doing great! So far you have completed 60% of your
@@ -143,7 +146,11 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
-          <div className="h-full w-1/3 py-4">
+        </div>
+
+        <div className="flex flex-row h-full w-1/3">
+          <div className="h-full w-full">
+            {/* Profile */}
             <div className="flex flex-col bg-white shadow-md h-full w-full rounded-xl p-4">
               <div>Lagay mo profile pic nila dito sheesh</div>
             </div>

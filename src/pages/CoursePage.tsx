@@ -286,11 +286,31 @@
 // export default CoursePage;
 
 import React from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const CoursePage = () => {
+  const { user } = useAuthContext();
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
-      <div className="flex flex-col h-full bg-gray-50 z-0 p-6">Courses</div>
+      <div className="h-full bg-red-400 z-0 p-6">
+        <div className="flex flex-col lg:flex-row h-full w-full">
+          <div className="w-full lg:w-2/3 bg-blue-400 h-full">
+            <div className="flex flex-col w-full h-[10%]">
+              <h1 className="text-black text-4xl">
+                Good Day,{" "}
+                <span className="text-caribbean-600">
+                  {user.user_.firstName}
+                </span>
+              </h1>
+              <h3 className="text-gray-500 font-normal text-sm">
+                Here is your profile overview
+              </h3>
+            </div>
+            <div className="bg-orange-400 h-[90%]">girl</div>
+          </div>
+          <div className="w-full lg:w-1/3 bg-green-400 h-full">hello</div>
+        </div>
+      </div>
     </div>
   );
 };
