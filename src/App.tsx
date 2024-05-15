@@ -18,6 +18,7 @@ import NotLoggedIn from "./components/NotLoggedIn";
 import SettingsPage from "./pages/SettingsPage";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import NotFound from "./components/NotFound";
+import CoursePage from "./pages/CoursePage";
 
 function App() {
   return (
@@ -60,6 +61,19 @@ function AppContent() {
               <div className="flex flex-row bg-[#1c1c1c]">
                 <Sidebar />
                 <DashboardPage />
+              </div>
+            ) : (
+              <Navigate to="/no-access" />
+            )
+          }
+        />
+        <Route
+          path="/courses"
+          element={
+            user ? (
+              <div className="flex flex-row bg-[#1c1c1c]">
+                <Sidebar />
+                <CoursePage />
               </div>
             ) : (
               <Navigate to="/no-access" />

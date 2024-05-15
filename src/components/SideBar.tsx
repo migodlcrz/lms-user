@@ -61,7 +61,8 @@ const Sidebar = () => {
             <button
               disabled={!isOpen}
               onClick={() => {
-                // navigate("/courses");
+                navigate("/courses");
+                setIsOpen(false);
               }}
               className={`flex flex-row items-center space-x-4 px-2 py-1 w-[220px] rounded-xl mx-3 my-4 text-white transition-colors duration-300 ${
                 currentPath === "/courses"
