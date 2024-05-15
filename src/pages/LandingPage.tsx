@@ -118,9 +118,21 @@ const LandingInfo = () => {
         </div> */}
         </div>
       </div>
-      <div className="flex flex-col h-screen overflow-hidden bg-white relative">
-        <div className="flex h-1/2 bg-white"></div>
-        <div className="flex h-1/2 bg-gradient-to-r from-caribbean-500 to-caribbean-700"></div>
+      <div className="flex flex-col h-screen overflow-hidden">
+        <div className="flex h-1/4 bg-white relative p-2">
+          <div className=" flex flex-row space-x-6 absolute w-[95%] h-full bottom-0 left-1/2 translate-y-[15%] translate-x-[-50%]">
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+              <div className="h-full w-1/4">icon</div>
+              <div className="flex flex-col h-full w-3/4">
+                <h2>hello</h2>
+                <h3>asdjioasd asdha uadaa huiasdhuais haisu h</h3>
+              </div>
+            </div>
+            <div className="bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl"></div>
+            <div className="bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl"></div>
+          </div>
+        </div>
+        <div className="flex h-3/4 bg-gradient-to-r from-caribbean-500 to-caribbean-700"></div>
       </div>
     </>
   );

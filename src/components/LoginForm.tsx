@@ -61,6 +61,7 @@ const LoginForm = () => {
         );
 
         const json = await res.json();
+        console.log(json);
 
         googleLogin(json.email);
       } catch (error) {
