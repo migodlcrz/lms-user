@@ -70,8 +70,11 @@ const RegisterForm = () => {
 
         const json = await res.json();
 
-        console.log(json);
-        // googleSignUp(json.name, json.email);
+        // console.log(json.given_name);
+        // console.log(json.family_name);
+        // console.log(json.email);
+        // console.log(json.sub);
+        googleSignUp(json.given_name, json.family_name, json.email, json.sub);
       } catch (error) {
         console.log(error);
       }

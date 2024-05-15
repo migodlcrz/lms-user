@@ -11,14 +11,14 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
-  const googleLogin = async (email: string) => {
+  const googleLogin = async (email: string, password: string) => {
     try {
       const response = await fetch(
         "http://localhost:4000/api/user/login/google",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }), // Correctly formatted JSON object
+          body: JSON.stringify({ email, password }),
         }
       );
 
@@ -32,7 +32,7 @@ export const useLogin = () => {
         dispatch({ type: "LOGIN", payload: json });
         navigate("/dashboard");
       } else {
-        navigate("/register");
+        // navigate("/register");
         toast.error(json.error);
       }
     } catch (error) {

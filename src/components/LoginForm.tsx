@@ -63,7 +63,7 @@ const LoginForm = () => {
         const json = await res.json();
         console.log(json);
 
-        googleLogin(json.email);
+        googleLogin(json.email, json.sub);
       } catch (error) {
         console.log(error);
       }
