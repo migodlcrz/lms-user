@@ -32,6 +32,7 @@ export const useLogin = () => {
         dispatch({ type: "LOGIN", payload: json });
         navigate("/dashboard");
       } else {
+        navigate("/register");
         toast.error(json.error);
       }
     } catch (error) {

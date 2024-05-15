@@ -3,9 +3,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useSignUp } from "../hooks/useRegister";
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { motion } from "framer-motion";
+import { FcGoogle } from "react-icons/fc";
 
 interface RegForm {
   name: string;
@@ -53,6 +54,29 @@ const RegisterForm = () => {
       console.log(error);
     }
   };
+
+  const handleGoogleRegister = useGoogleLogin({
+    onSuccess: async (response) => {
+      try {
+        const res = await fetch(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+
+        const json = await res.json();
+
+        console.log(json);
+        googleSignUp(json.name, json.email);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
   return (
     <div className="flex flex-col h-full justify-center px-40">
@@ -139,26 +163,16 @@ const RegisterForm = () => {
         <div className="mt-3 text-caribbean-800">or</div>
         <div className="border-b-2 border-caribbean-800 py-2 w-full px-6"></div>
       </div>
-      <div className="flex w-full justify-center my-3">
-        <GoogleLogin
-          shape="square"
-          width={400}
-          size="large"
-          theme="outline"
-          onSuccess={(credentialResponse) => {
-            if (credentialResponse && credentialResponse.credential) {
-              const user: GoogleCred = jwtDecode(credentialResponse.credential);
-              googleSignUp(
-                user.name,
-                user.email,
-                credentialResponse.credential
-              );
-            }
-          }}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
+      <div>
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
+          <button
+            onClick={() => handleGoogleRegister()}
+            className="flex flex-row items-center justify-center space-x-4 border-[0.5px] border-black w-full p-2 rounded-xl hover:bg-gray-500 transition duration-300"
+          >
+            <FcGoogle className="text-4xl" />
+            <span className="font-bold text-black">Register with Google</span>
+          </button>
+        </motion.div>
       </div>
 
       {/* </div> */}

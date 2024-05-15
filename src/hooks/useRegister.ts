@@ -14,13 +14,11 @@ export const useSignUp = () => {
   const navigate = useNavigate();
   const { dispatch } = useAuthContext();
 
-  const googleSignUp = async (name: string, email: string, token: string) => {
-    const bodyData = {
+  const googleSignUp = async (name: string, email: string) => {
+    const bodyRequest = {
       name: name,
       email: email,
-      token: token,
     };
-
     const response = await fetch(
       "http://localhost:4000/api/user/register/google",
       {
@@ -28,7 +26,7 @@ export const useSignUp = () => {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(bodyData),
+        body: JSON.stringify(bodyRequest),
       }
     );
 
@@ -36,12 +34,13 @@ export const useSignUp = () => {
 
     if (response.ok) {
       toast.success(json.message);
-      localStorage.setItem("user", JSON.stringify(json));
+      // localStorage.setItem("user", JSON.stringify(json));
       dispatch({ type: "LOGIN", payload: json });
       navigate("/login");
     }
 
     if (!response.ok) {
+      navigate("/login");
       toast.error(json.error);
     }
   };
