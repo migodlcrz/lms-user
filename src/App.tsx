@@ -1,24 +1,17 @@
-import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import { useAuthContext } from "./hooks/useAuthContext";
-import { ToastContainer } from "react-toastify";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "react-responsive-modal/styles.css";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import NotFound from "./components/NotFound";
+import NotLoggedIn from "./components/NotLoggedIn";
+import Sidebar from "./components/SideBar";
+import { useAuthContext } from "./hooks/useAuthContext";
+import CoursePage from "./pages/CoursePage";
+import DashboardPage from "./pages/DashboardPage";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import DashboardPage from "./pages/DashboardPage";
-import Sidebar from "./components/SideBar";
-import NotLoggedIn from "./components/NotLoggedIn";
 import SettingsPage from "./pages/SettingsPage";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import NotFound from "./components/NotFound";
-import CoursePage from "./pages/CoursePage";
 
 function App() {
   return (
@@ -29,13 +22,7 @@ function App() {
 }
 
 function AppContent() {
-  const location = useLocation();
   const { user } = useAuthContext();
-
-  const hideSidebarOnPages = ["/", "/login", "/register", "/no-access"];
-  const shouldRenderSidebar =
-    !hideSidebarOnPages.includes(location.pathname) ||
-    "*".includes(location.pathname);
 
   return (
     <div>

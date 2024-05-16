@@ -1,21 +1,17 @@
-import React, { PureComponent } from "react";
-import Sidebar from "../components/SideBar";
-import { useAuthContext } from "../hooks/useAuthContext";
 import Lottie from "lottie-react";
-import animation from "../images/online.json";
 import {
-  RadialBarChart,
-  RadialBar,
+  Bar,
+  BarChart,
+  CartesianGrid,
   Legend,
   ResponsiveContainer,
-  BarChart,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  CartesianGrid,
-  Bar,
 } from "recharts";
 import CustomCalendar from "../components/Calendar";
+import { useAuthContext } from "../hooks/useAuthContext";
+import animation from "../images/online.json";
 // import "rsuite/dist/rsuite.min.css";
 
 const data = [

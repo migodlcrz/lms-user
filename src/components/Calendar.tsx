@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { MdDeleteOutline } from "react-icons/md";
 
 // Utility function to get the number of days in a month
 const getDaysInMonth = (year: number, month: number): number => {
@@ -12,8 +13,9 @@ const getFirstDayOfMonth = (year: number, month: number): number => {
 };
 
 interface TodoItem {
+  _id: string;
   title: string;
-  date: number;
+  date: Date; // Store the full date object
 }
 
 const CustomCalendar: React.FC = () => {
@@ -36,6 +38,8 @@ const CustomCalendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(today);
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [addList, setAddlist] = useState("");
+  const [formOpen, setFormOpen] = useState<Boolean>(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Function to fetch and set the to-do list for the selected date
   const fetchTodoList = async (date: Date) => {
@@ -48,7 +52,12 @@ const CustomCalendar: React.FC = () => {
         throw new Error("Failed to fetch to-do list");
       }
       const data = await response.json();
-      setTodoList(data.todos);
+      // Convert dates to Date objects
+      const todosWithDates = data.todos.map((todo: any) => ({
+        ...todo,
+        date: new Date(todo.date),
+      }));
+      setTodoList(todosWithDates);
     } catch (error) {
       console.error("Error fetching to-do list:", error);
       setTodoList([]);
@@ -83,12 +92,38 @@ const CustomCalendar: React.FC = () => {
 
       if (response.ok) {
         console.log(json.message);
-      }
-
-      if (!response.ok) {
+        // Refresh the todo list after adding a new todo
+        fetchTodoList(selectedDate);
+        setAddlist("");
+      } else {
         console.log(json.error);
+        setAddlist("");
       }
     } catch (error) {
+      console.log("ERROR");
+    }
+  };
+
+  const deleteToDo = async (taskId: string) => {
+    console.log("HELLO: ", taskId);
+
+    const response = await fetch(
+      `http://localhost:4000/api/user/${user.user_._id}/todo/delete/${taskId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = response.json();
+
+    if (response.ok) {
+      console.log("OK");
+      console.log(json);
+      fetchTodoList(selectedDate);
+    } else {
       console.log("ERROR");
     }
   };
@@ -124,9 +159,12 @@ const CustomCalendar: React.FC = () => {
 
             {daysArray.map((day) => {
               const currentDay = new Date(currentYear, currentMonth, day);
+              // console.log(currentDay)
               const isSelected =
                 currentDay.toDateString() === selectedDate.toDateString();
-              const hasTodo = todoList.some((todo) => todo.date === day); // Check if the current day has a to-do
+              const hasTodo = todoList.some(
+                (todo) => todo.date.toDateString() === currentDay.toDateString()
+              ); // Check if the current day has a to-do
 
               return (
                 <div
@@ -146,7 +184,9 @@ const CustomCalendar: React.FC = () => {
                   }}
                 >
                   <div
-                    className={`${hasTodo ? "border-b-2 border-red-400" : ""}`}
+                    className={`text-xs ${
+                      hasTodo ? "border-b-2 border-red-400" : ""
+                    }`}
                   >
                     {day}
                   </div>
@@ -160,35 +200,67 @@ const CustomCalendar: React.FC = () => {
         <div className="flex flex-col bg-white w-full h-full rounded-xl shadow-md p-4">
           <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-caribbean-600">
             <p>{selectedDate.toDateString()}</p>
-            <button>+</button>
-          </h3>
-          <ul>
-            {todoList.filter((todo) => todo.date === selectedDate.getDate())
-              .length > 0 ? (
-              todoList
-                .filter((todo) => todo.date === selectedDate.getDate())
-                .map((todo, index) => (
-                  <li key={index} className="mb-1">
-                    {todo.title}
-                  </li>
-                ))
-            ) : (
-              <p className="text-black font-normal mb-1">
-                No to-dos for this date.
-              </p>
-            )}
-          </ul>
-          <form onSubmit={addToDo} className="flex flex-row w-full">
-            <input
-              type="text"
-              placeholder="Input task"
-              onChange={(e) => {
-                setAddlist(e.target.value);
+            <button
+              onClick={() => {
+                setFormOpen(!formOpen);
               }}
-              className="input border-[0.5px] border-black h-6 px-2"
-            />
-            <button className="">Submit</button>
-          </form>
+            >
+              +
+            </button>
+          </h3>
+          <div className="h-full w-full overflow-y-scroll">
+            <ul>
+              {todoList.filter(
+                (todo) =>
+                  todo.date.toDateString() === selectedDate.toDateString()
+              ).length > 0 ? (
+                todoList
+                  .filter(
+                    (todo) =>
+                      todo.date.toDateString() === selectedDate.toDateString()
+                  )
+                  .map((todo, index) => (
+                    <li
+                      key={index}
+                      className="flex flex-row w-full justify-between hover:bg-gray-200 transition p-1"
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                    >
+                      {todo.title}
+                      {hoveredIndex === index && (
+                        <button
+                          onClick={() => {
+                            deleteToDo(todo._id);
+                          }}
+                          className="bg-gradient-to-b from-red-500 to-red-700 p-1 rounded-xl"
+                        >
+                          <span className="text-white font-semibold">
+                            <MdDeleteOutline />
+                          </span>
+                        </button>
+                      )}
+                    </li>
+                  ))
+              ) : (
+                <p className="text-black font-normal mb-1">
+                  No to-dos for this date.
+                </p>
+              )}
+            </ul>
+          </div>
+          {formOpen && (
+            <form onSubmit={addToDo} className="flex flex-row w-full">
+              <input
+                type="text"
+                placeholder="Input task"
+                onChange={(e) => {
+                  setAddlist(e.target.value);
+                }}
+                value={addList}
+                className="input border-[0.5px] border-caribbean h-6 px-2"
+              />
+            </form>
+          )}
         </div>
       </div>
     </div>
