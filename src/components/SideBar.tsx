@@ -19,15 +19,15 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sticky top-0 h-full overflow-hidden z-50">
+    <div className="sticky flex top-0 h-full z-50">
       <div
         onClick={() => !isOpen && toggleSidebar()}
-        className={`flex items-start transition-all duration-300 overflow-hidden bg-[#1c1c1c] shadow-lg shadow-black z-50 ${
+        className={`flex items-start transition-all duration-300  bg-[#1c1c1c] z-50 ${
           isOpen ? "w-80" : "w-20"
         }`}
       >
-        <div>
-          <div className="flex flex-row items-center space-x-4 p-4 w-screen shadow-md bg-gradient-to-r from-caribbean-500 via-caribbean-700 to-caribbean-900">
+        <div className="w-full">
+          <div className="flex flex-row items-center space-x-4 p-4 w-full shadow-md bg-gradient-to-r from-caribbean-500 via-caribbean-700 to-caribbean-900">
             <button
               className="text-white hover:text-black text-2xl z-50 mx-3 transition-colors duration-300"
               onClick={toggleSidebar}
@@ -35,22 +35,32 @@ const Sidebar = () => {
               <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
             </button>
             <div>
-              <p className="text-white font-bold text-3xl">Learnify</p>
+              <p
+                className={
+                  "text-white font-bold text-3xl " + (isOpen ? "" : "hidden")
+                }
+              >
+                Learnify
+              </p>
             </div>
           </div>
 
-          <ul className="flex flex-col">
+          <ul className="flex flex-col p-3 space-y-6">
             <button
-              disabled={!isOpen}
+              // disabled={!isOpen}
               onClick={() => {
-                navigate("/dashboard");
-                setIsOpen(false);
+                if (isOpen) {
+                  navigate("/dashboard");
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
               }}
-              className={`flex flex-row items-center space-x-4 px-2 w-[220px] rounded-xl mx-3 my-4 text-white transition-colors duration-300 ${
+              className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/dashboard"
                   ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-caribbean-300 hover:via-caribbean-500 hover:to-caribbean-700 hover:text-black"
+                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">
@@ -59,16 +69,20 @@ const Sidebar = () => {
               {isOpen && <p className="font-bold text-sm w-full">Overview</p>}
             </button>
             <button
-              disabled={!isOpen}
+              // disabled={!isOpen}
               onClick={() => {
-                navigate("/courses");
-                setIsOpen(false);
+                if (isOpen) {
+                  navigate("/courses");
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
               }}
-              className={`flex flex-row items-center space-x-4 px-2 py-1 w-[220px] rounded-xl mx-3 my-4 text-white transition-colors duration-300 ${
+              className={`flex flex-row items-center space-x-4 px-2 py-1 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/courses"
                   ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-caribbean-300 hover:via-caribbean-500 hover:to-caribbean-700 hover:text-black"
+                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">
@@ -77,16 +91,20 @@ const Sidebar = () => {
               {isOpen && <p className="font-bold text-sm w-full">My Courses</p>}
             </button>
             <button
-              disabled={!isOpen}
+              // disabled={!isOpen}
               onClick={() => {
-                navigate("/settings");
-                setIsOpen(false);
+                if (isOpen) {
+                  navigate("/settings");
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
               }}
-              className={`flex flex-row items-center space-x-4 px-2 w-[220px] rounded-xl mx-3 my-4 text-white transition-colors duration-300 ${
+              className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/settings"
                   ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-caribbean-300 hover:via-caribbean-500 hover:to-caribbean-700 hover:text-black"
+                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">
