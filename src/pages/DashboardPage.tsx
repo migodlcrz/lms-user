@@ -15,6 +15,8 @@ import {
   CartesianGrid,
   Bar,
 } from "recharts";
+import CustomCalendar from "../components/Calendar";
+// import "rsuite/dist/rsuite.min.css";
 
 const data = [
   {
@@ -152,9 +154,9 @@ const DashboardPage = () => {
           <div className="h-full w-full">
             {/* Profile */}
             <div className="flex flex-col space-y-3 bg-white shadow-md h-full w-full rounded-xl p-6 items-center">
-              <div className="flex flex-row space-x-3 w-full border-b-[1px] rounded-sm border-gray-300 pb-4">
+              <div className="flex flex-row space-x-3 w-full border-b-[1px] rounded-sm border-gray-300 pb-4 h-1/6">
                 <div className="avatar online w-1/4">
-                  <div className="w-24 rounded-full">
+                  <div className="w-24 h-24 rounded-full">
                     <img
                       src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
                       alt=""
@@ -174,9 +176,9 @@ const DashboardPage = () => {
                   </h3>
                 </div>
               </div>
-              <div>Badges</div>
-              <div>Calendar</div>
-              <div>To do</div>
+              <div className="h-4/6 w-full">
+                <CustomCalendar />
+              </div>
             </div>
           </div>
         </div>
