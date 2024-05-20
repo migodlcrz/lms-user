@@ -13,7 +13,6 @@ export const useSignUp = () => {
   //   const [error, setError] = useState(null);
   //   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { dispatch } = useAuthContext();
 
   const googleSignUp = async (
     firstName: string,
@@ -47,6 +46,7 @@ export const useSignUp = () => {
 
     if (!response.ok) {
       toast.error(json.error);
+      navigate("/login");
     }
   };
 
@@ -66,12 +66,12 @@ export const useSignUp = () => {
 
     if (!response.ok) {
       toast.error(json.error);
-      console.log(json);
+      navigate("/login");
     }
 
     if (response.ok) {
       toast.success(json.message);
-      dispatch({ type: "LOGIN", payload: json });
+      // dispatch({ type: "LOGIN", payload: json });
       navigate("/login");
     }
   };

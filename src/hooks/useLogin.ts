@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { useAuthContext } from "./useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { useSignUp } from "./useRegister";
 
 interface LoginForm {
   email: string;
@@ -8,10 +9,16 @@ interface LoginForm {
 }
 
 export const useLogin = () => {
+  const { signup, googleSignUp } = useSignUp();
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
-  const googleLogin = async (email: string, password: string) => {
+  const googleLogin = async (
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) => {
     try {
       const response = await fetch(
         "http://localhost:4000/api/user/login/google",
@@ -33,7 +40,7 @@ export const useLogin = () => {
         navigate("/dashboard");
       } else {
         // navigate("/register");
-        toast.error(json.error);
+        await googleSignUp(firstName, lastName, email, password);
       }
     } catch (error) {
       toast.error("An error occurred while logging in.");

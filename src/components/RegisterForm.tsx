@@ -80,7 +80,7 @@ const RegisterForm = () => {
   });
 
   return (
-    <div className="flex flex-col h-full justify-center px-40">
+    <div className="flex flex-col h-full justify-center px-40 bg-slate-50">
       {/* <div className="grid place-items-center h-screen bg-cream"> */}
       {/* <div className="bg-white shadow-lg p-5 min-w-[60%] border-t-4 border-harvest_gold"> */}
       <div className="flex flex-row">
