@@ -9,19 +9,16 @@ import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 
 interface RegForm {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
 
-interface GoogleCred {
-  name: string;
-  email: string;
-}
-
 const RegisterForm = () => {
   const [regForm, setRegForm] = useState<RegForm>({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -33,7 +30,8 @@ const RegisterForm = () => {
 
   const clearForm = () => {
     setRegForm({
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
     });
@@ -101,16 +99,28 @@ const RegisterForm = () => {
         </h1>
       </div>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-3">
-        <input
-          type="text"
-          placeholder="Full Name"
-          className="input-md border-caribbean border-2 shadow-md rounded-xl"
-          data-testid=""
-          value={regForm.name}
-          onChange={(e) => {
-            changeHandler("name", e.target.value);
-          }}
-        />
+        <div className="flex flex-row w-full space-x-2">
+          <input
+            type="text"
+            placeholder="First Name"
+            className="input-md border-caribbean border-2 shadow-md rounded-xl w-1/2"
+            data-testid=""
+            value={regForm.firstName}
+            onChange={(e) => {
+              changeHandler("firstName", e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            className="input-md border-caribbean border-2 shadow-md rounded-xl w-1/2"
+            data-testid=""
+            value={regForm.lastName}
+            onChange={(e) => {
+              changeHandler("lastName", e.target.value);
+            }}
+          />
+        </div>
         <input
           type="text"
           placeholder="Email"

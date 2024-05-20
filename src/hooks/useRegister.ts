@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 interface RegForm {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
 }
@@ -41,13 +42,10 @@ export const useSignUp = () => {
 
     if (response.ok) {
       toast.success(json.message);
-      // localStorage.setItem("user", JSON.stringify(json));
-      // dispatch({ type: "LOGIN", payload: json });
-      // navigate("/login");
+      navigate("/login");
     }
 
     if (!response.ok) {
-      navigate("/login");
       toast.error(json.error);
     }
   };
@@ -68,6 +66,7 @@ export const useSignUp = () => {
 
     if (!response.ok) {
       toast.error(json.error);
+      console.log(json);
     }
 
     if (response.ok) {

@@ -13,6 +13,7 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "poly-bg": "url('/src/images/lowpoly-bg.svg')",
       },
       textShadow: {
         sm: "0 1px 2px var(--tw-shadow-color)",

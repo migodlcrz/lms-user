@@ -8,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import layeredBG from "../images/lowpoly-bg.svg";
 
 interface LogForm {
   email: string;
@@ -71,7 +72,14 @@ const LoginForm = () => {
   });
 
   return (
-    <div className="flex flex-col h-full justify-center px-40">
+    <div
+      className="flex flex-col h-full justify-center px-40 bg-slate-50"
+      // style={{
+      //   backgroundImage: `url(${layeredBG})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      // }}
+    >
       {/* <div className="grid place-items-center h-screen bg-white">
         <div className="bg-white shadow-lg p-5 min-w-80 border-t-4 border-harvest_gold m-10"> */}
       <div className="flex flex-row ">
@@ -85,7 +93,7 @@ const LoginForm = () => {
           <MdKeyboardArrowLeft />
         </button>
         <h1 className="text-sm lg:text-xl font-bold my-4 text-center text-black">
-          Hello Again!
+          Login
         </h1>
       </div>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-3">

@@ -19,10 +19,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sticky flex top-0 h-full z-50">
+    <div className="sticky flex top-0 h-screen z-50">
       <div
         onClick={() => !isOpen && toggleSidebar()}
-        className={`flex items-start transition-all duration-300  bg-[#1c1c1c] z-50 ${
+        className={`flex items-start transition-all duration-300 bg-[#1c1c1c] z-50 ${
           isOpen ? "w-80" : "w-20"
         }`}
       >

@@ -45,7 +45,7 @@ function AppContent() {
           path="/dashboard"
           element={
             user ? (
-              <div className="flex flex-row bg-[#1c1c1c]">
+              <div className="flex flex-row">
                 <Sidebar />
                 <DashboardPage />
               </div>
@@ -58,7 +58,7 @@ function AppContent() {
           path="/courses"
           element={
             user ? (
-              <div className="flex flex-row bg-[#1c1c1c]">
+              <div className="flex flex-row">
                 <Sidebar />
                 <CoursePage />
               </div>
@@ -71,7 +71,7 @@ function AppContent() {
           path="/settings"
           element={
             user ? (
-              <div className="flex flex-row bg-[#1c1c1c]">
+              <div className="flex flex-row">
                 <Sidebar />
                 <SettingsPage />
               </div>
