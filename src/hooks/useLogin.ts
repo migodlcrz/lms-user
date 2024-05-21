@@ -38,7 +38,26 @@ export const useLogin = () => {
         navigate("/dashboard");
       } else {
         // navigate("/register");
-        await googleSignUp(firstName, lastName, email, password);
+        const bodyRequest = {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        };
+        const response = await fetch(`${port}/api/user/register/google`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(bodyRequest),
+        });
+
+        const json = await response.json();
+
+        if (response.ok) {
+          toast.success(json.message);
+          navigate("/login");
+        }
       }
     } catch (error) {
       toast.error("An error occurred while logging in.");

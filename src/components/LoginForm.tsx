@@ -139,12 +139,17 @@ const LoginForm = () => {
         </motion.div>
       </form>
       <div className="w-full text-start mt-2 text-sm lg;text-md">
-        <a className="text-sm mt-3 text-center" href={"/register"}>
+        <button
+          onClick={() => {
+            navigate("/register");
+          }}
+          className="text-sm mt-3 text-center"
+        >
           {"Don't have an account?"}{" "}
           <span className="text-caribbean-700 hover:text-caribbean-900 font-bold">
             Register
           </span>
-        </a>
+        </button>
       </div>
       <div className="flex justify-center items-center w-full gap-3 py-3">
         <div className="border-b-2 border-caribbean-800 py-2 w-full px-6"></div>

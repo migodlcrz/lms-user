@@ -59,15 +59,14 @@ export const useSignUp = () => {
           dispatch({ type: "LOGIN", payload: json });
           navigate("/dashboard");
         } else {
+          console.log("ERROR");
           // navigate("/register");
-          await googleSignUp(firstName, lastName, email, password);
+          // await googleSignUp(firstName, lastName, email, password);
         }
       } catch (error) {
         toast.error("An error occurred while logging in.");
         console.error("Login error:", error);
       }
-      // toast.error(json.error);
-      // navigate("/login");
     }
   };
 
