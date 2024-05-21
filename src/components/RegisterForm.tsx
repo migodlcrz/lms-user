@@ -1,12 +1,11 @@
-import { useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { useSignUp } from "../hooks/useRegister";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { useSignUp } from "../hooks/useRegister";
 
 interface RegForm {
   firstName: string;

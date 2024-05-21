@@ -10,7 +10,7 @@ interface LoginForm {
 
 export const useLogin = () => {
   const port = process.env.REACT_APP_URL;
-  const { signup, googleSignUp } = useSignUp();
+  const { googleSignUp } = useSignUp();
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
