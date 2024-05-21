@@ -86,7 +86,7 @@ export const useSignUp = () => {
 
     if (!response.ok) {
       toast.error(json.error);
-      navigate("/login");
+      // navigate("/login");
     }
 
     if (response.ok) {
