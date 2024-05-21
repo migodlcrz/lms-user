@@ -20,6 +20,7 @@ interface TodoItem {
 
 const CustomCalendar: React.FC = () => {
   const { user } = useAuthContext();
+  const port = process.env.REACT_APP_URL;
   const today = new Date();
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth();
@@ -45,9 +46,7 @@ const CustomCalendar: React.FC = () => {
   const fetchTodoList = async (date: Date) => {
     console.log(user._id);
     try {
-      const response = await fetch(
-        `http://localhost:4000/api/user/todo/${user.user_._id}`
-      );
+      const response = await fetch(`${port}/api/user/todo/${user.user_._id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch to-do list");
       }
@@ -78,7 +77,7 @@ const CustomCalendar: React.FC = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:4000/api/user/todo/add/${user.user_._id}`,
+        `${port}/api/user/todo/add/${user.user_._id}`,
         {
           method: "POST",
           headers: {
@@ -108,7 +107,7 @@ const CustomCalendar: React.FC = () => {
     console.log("HELLO: ", taskId);
 
     const response = await fetch(
-      `http://localhost:4000/api/user/${user.user_._id}/todo/delete/${taskId}`,
+      `${port}/api/user/${user.user_._id}/todo/delete/${taskId}`,
       {
         method: "DELETE",
         headers: {

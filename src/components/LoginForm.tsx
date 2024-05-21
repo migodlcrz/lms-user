@@ -8,7 +8,6 @@ import { FcGoogle } from "react-icons/fc";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
-import layeredBG from "../images/lowpoly-bg.svg";
 
 interface LogForm {
   email: string;

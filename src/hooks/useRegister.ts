@@ -12,6 +12,7 @@ interface RegForm {
 export const useSignUp = () => {
   //   const [error, setError] = useState(null);
   //   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const port = process.env.REACT_APP_URL;
   const navigate = useNavigate();
 
   const googleSignUp = async (
@@ -26,16 +27,13 @@ export const useSignUp = () => {
       email: email,
       password: password,
     };
-    const response = await fetch(
-      "http://localhost:4000/api/user/register/google",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(bodyRequest),
-      }
-    );
+    const response = await fetch(`${port}/api/user/register/google`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(bodyRequest),
+    });
 
     const json = await response.json();
 
@@ -56,7 +54,7 @@ export const useSignUp = () => {
 
     console.log("PUMASOK", regForm);
 
-    const response = await fetch("http://localhost:4000/api/user/register", {
+    const response = await fetch(`${port}/api/user/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(regForm),
