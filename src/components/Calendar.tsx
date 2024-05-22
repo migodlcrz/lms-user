@@ -139,16 +139,16 @@ const CustomCalendar: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex justify-center h-2/3">
+      <div className="flex justify-center h-1/2">
         <div className="bg-white rounded-xl p-4 shadow-md w-full">
           <div className="flex justify-between mb-2">
-            <h2 className="text-lg font-bold text-caribbean-600">
+            <h2 className="text-lg font-bold text-harvest_gold-600">
               {today.toLocaleString("default", { month: "long" })} {currentYear}
             </h2>
           </div>
           <div className="grid grid-cols-7 gap-2">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-              <div key={day} className="text-center font-medium">
+              <div key={day} className="text-center font-bold">
                 {day}
               </div>
             ))}
@@ -168,18 +168,17 @@ const CustomCalendar: React.FC = () => {
               return (
                 <div
                   key={day}
-                  className={`flex justify-center text-center p-2 rounded-xl cursor-pointer hover:bg-gray-200 transition ${
+                  className={`flex justify-center text-center p-2 rounded-xl text-black font-semibold cursor-pointer transition ${
                     day === currentDate
-                      ? "shadow-lg bg-gradient-to-r from-caribbean-500 to-caribbean-600 font-bold"
+                      ? "shadow-lg bg-gradient-to-r from-harvest_gold-500 to-harvest_gold-600 font-bold"
                       : ""
                   } ${
                     isSelected
-                      ? "bg-gradient-to-r from-caribbean-200 to-caribbean-400 shadow-inner"
+                      ? "border-[0.5px] border-harvest_gold-500 shadow-inner"
                       : ""
                   }`}
                   onClick={() => {
                     handleDateClick(currentDay);
-                    console.log(currentDay);
                   }}
                 >
                   <div
@@ -195,71 +194,73 @@ const CustomCalendar: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="h-1/3 w-full py-2">
-        <div className="flex flex-col bg-white w-full h-full rounded-xl shadow-md p-4">
-          <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-caribbean-600">
-            <p>{selectedDate.toDateString()}</p>
-            <button
-              onClick={() => {
-                setFormOpen(!formOpen);
-              }}
-            >
-              +
-            </button>
-          </h3>
-          <div className="h-full w-full overflow-y-scroll">
-            <ul>
-              {todoList.filter(
-                (todo) =>
-                  todo.date.toDateString() === selectedDate.toDateString()
-              ).length > 0 ? (
-                todoList
-                  .filter(
-                    (todo) =>
-                      todo.date.toDateString() === selectedDate.toDateString()
-                  )
-                  .map((todo, index) => (
-                    <li
-                      key={index}
-                      className="flex flex-row w-full justify-between hover:bg-gray-200 transition p-1"
-                      onMouseEnter={() => setHoveredIndex(index)}
-                      onMouseLeave={() => setHoveredIndex(null)}
-                    >
-                      {todo.title}
-                      {hoveredIndex === index && (
-                        <button
-                          onClick={() => {
-                            deleteToDo(todo._id);
-                          }}
-                          className="bg-gradient-to-b from-red-500 to-red-700 p-1 rounded-xl"
-                        >
-                          <span className="text-white font-semibold">
-                            <MdDeleteOutline />
-                          </span>
-                        </button>
-                      )}
-                    </li>
-                  ))
-              ) : (
-                <p className="text-black font-normal mb-1">
-                  No to-dos for this date.
-                </p>
-              )}
-            </ul>
-          </div>
-          {formOpen && (
-            <form onSubmit={addToDo} className="flex flex-row w-full">
-              <input
-                type="text"
-                placeholder="Input task"
-                onChange={(e) => {
-                  setAddlist(e.target.value);
+      <div className="h-1/2 w-full py-2">
+        <div className="flex flex-col bg-poly-bg-yellow w-full h-full rounded-2xl shadow-md p-4">
+          <div className="flex flex-col bg-slate-50 w-full h-full rounded-xl shadow-xl p-4">
+            <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-harvest_gold-500">
+              <p>{selectedDate.toDateString()}</p>
+              <button
+                onClick={() => {
+                  setFormOpen(!formOpen);
                 }}
-                value={addList}
-                className="input border-[0.5px] border-caribbean h-6 px-2"
-              />
-            </form>
-          )}
+              >
+                + Add to do
+              </button>
+            </h3>
+            <div className="h-full w-full overflow-y-scroll">
+              <ul>
+                {todoList.filter(
+                  (todo) =>
+                    todo.date.toDateString() === selectedDate.toDateString()
+                ).length > 0 ? (
+                  todoList
+                    .filter(
+                      (todo) =>
+                        todo.date.toDateString() === selectedDate.toDateString()
+                    )
+                    .map((todo, index) => (
+                      <li
+                        key={index}
+                        className="flex flex-row w-full justify-between hover:bg-gray-200 transition p-1"
+                        onMouseEnter={() => setHoveredIndex(index)}
+                        onMouseLeave={() => setHoveredIndex(null)}
+                      >
+                        {todo.title}
+                        {hoveredIndex === index && (
+                          <button
+                            onClick={() => {
+                              deleteToDo(todo._id);
+                            }}
+                            className="bg-gradient-to-b from-red-500 to-red-700 p-1 rounded-xl"
+                          >
+                            <span className="text-white font-semibold">
+                              <MdDeleteOutline />
+                            </span>
+                          </button>
+                        )}
+                      </li>
+                    ))
+                ) : (
+                  <p className="text-black font-normal mb-1">
+                    No to-dos for this date.
+                  </p>
+                )}
+              </ul>
+            </div>
+            {formOpen && (
+              <form onSubmit={addToDo} className="flex flex-row w-full">
+                <input
+                  type="text"
+                  placeholder="Input task"
+                  onChange={(e) => {
+                    setAddlist(e.target.value);
+                  }}
+                  value={addList}
+                  className="input border-[0.5px] border-harvest_gold h-6 px-2 w-full mt-2"
+                />
+              </form>
+            )}
+          </div>
         </div>
       </div>
     </div>

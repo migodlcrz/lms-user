@@ -6,6 +6,11 @@ import {
   Legend,
   Pie,
   PieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -18,67 +23,35 @@ import animation from "../images/online.json";
 
 const data = [
   {
-    name: "Page A",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
+    subject: "Math",
+    A: 87,
+    fullMark: 100,
   },
   {
-    name: "Page B",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
+    subject: "Chinese",
+    A: 50,
+    fullMark: 100,
   },
   {
-    name: "Page C",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
+    subject: "English",
+    A: 86,
+    fullMark: 100,
   },
   {
-    name: "Page D",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
+    subject: "Geography",
+    A: 99,
+    fullMark: 100,
   },
   {
-    name: "Page E",
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
+    subject: "Physics",
+    A: 85,
+    fullMark: 100,
   },
   {
-    name: "Page F",
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
+    subject: "History",
+    A: 65,
+    fullMark: 100,
   },
-  {
-    name: "Page G",
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
-
-const data01 = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
-const data02 = [
-  { name: "A1", value: 100 },
-  { name: "A2", value: 300 },
-  { name: "B1", value: 100 },
-  { name: "B2", value: 80 },
-  { name: "B3", value: 40 },
-  { name: "B4", value: 30 },
-  { name: "B5", value: 50 },
-  { name: "C1", value: 100 },
-  { name: "C2", value: 200 },
-  { name: "D1", value: 150 },
-  { name: "D2", value: 50 },
 ];
 
 const DashboardPage = () => {
@@ -86,23 +59,25 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
-      <div className="flex flex-row h-full bg-gray-50 z-0 p-6">
+      <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
         <div className="w-2/3">
           {/* Good day */}
           <div className="flex flex-col w-full h-[10%]">
-            <h1 className="text-black text-4xl">
+            <h1 className="text-white text-4xl">
               Good Day,{" "}
-              <span className="text-caribbean-600">{user.user_.firstName}</span>
+              <span className="text-harvest_gold-600">
+                {user.user_.firstName}
+              </span>
             </h1>
-            <h3 className="text-gray-500 font-normal text-sm">
+            <h3 className="text-white font-semibold text-sm">
               Here is your profile overview
             </h3>
           </div>
           {/* <div className="flex-grow bg-yellow-400 h-[90%]">hello</div> */}
           {/* Course progress */}
           <div className="flex flex-col h-[90%] w-full pr-6 space-y-6">
-            <div className="flex flex-row h-28 bg-gradient-to-l items-center shadow-md from-caribbean-500 via-caribbean-700 to-caribbean-900 rounded-xl py-3 px-7">
-              <p className="text-caribbean-50 font-bold w-4/5 text-xs md:text-xl">
+            <div className="flex flex-row h-28 bg-gradient-to-l items-center shadow-md from-harvest_gold-400 via-harvest_gold-500 to-harvest_gold-600 rounded-xl py-3 px-7">
+              <p className="text-harvest_gold-50 font-bold w-4/5 text-xs md:text-xl">
                 You are doing great! So far you have completed 60% of your
                 courses. Keep up the good job!
               </p>
@@ -110,14 +85,13 @@ const DashboardPage = () => {
                 <Lottie animationData={animation} className="mb-20" />
               </div>
             </div>
-            <div className="flex flex-col h-full bg-white rounded-xl shadow-md p-5 space-y-4">
-              <div className="flex flex-row items-center w-full ">
-                <h2 className="font-bold text-black text-3xl border-r-2 border-black pr-3 mr-3">
+            <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
+              <div className="flex flex-row items-center w-full border-b-2 border-oslo_gray-300 py-2">
+                <h2 className="font-bold text-harvest_gold-500 text-3xl  pr-3 mr-3">
                   Course Progress
                 </h2>
-                <p>These are your track records for your courses!</p>
               </div>
-              <div className="flex flex-row w-full h-full">
+              {/* <div className="flex flex-row w-full h-full">
                 <div className="flex flex-col space-y-5 w-1/5">
                   <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md p-3">
                     <p className="font-semibold text-gray-400">Courses</p>
@@ -189,6 +163,55 @@ const DashboardPage = () => {
                     </ResponsiveContainer>
                   </div>
                 </div>
+              </div> */}
+              <div className="flex flex-col w-full h-full">
+                <div className="flex flex-col w-full h-1/3 pb-3">
+                  <div className="w-full h-1/6 font-bold text-black">
+                    Courses Status
+                  </div>
+                  <div className="flex flex-row w-full h-5/6 space-x-3">
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
+                      <p className="font-semibold text-white">Total Courses</p>
+                      <h3 className="text-white font-bold text-5xl">10</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold text-black">Not Started</p>
+                      <h3 className="text-black font-bold text-5xl">10</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold text-black">In Progress</p>{" "}
+                      <h3 className="text-black font-bold text-5xl">12</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold text-black">Finished</p>{" "}
+                      <h3 className="text-black font-bold text-5xl">15</h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex w-full h-2/3">
+                  <div className=" h-full w-1/2">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RadarChart
+                        cx="50%"
+                        cy="50%"
+                        outerRadius="80%"
+                        data={data}
+                      >
+                        <PolarGrid />
+                        <PolarAngleAxis dataKey="subject" />
+                        <PolarRadiusAxis />
+                        <Radar
+                          name="Mike"
+                          dataKey="A"
+                          stroke="#8d6300"
+                          fill="#eca400"
+                          fillOpacity={0.5}
+                        />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <div className="h-full w-1/2 py-2"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -197,7 +220,7 @@ const DashboardPage = () => {
         <div className="flex flex-row h-full w-1/3">
           <div className="h-full w-full">
             {/* Profile */}
-            <div className="flex flex-col space-y-3 bg-white shadow-md h-full w-full rounded-xl p-6 items-center">
+            <div className="flex flex-col space-y-3 bg-oslo_gray-50 shadow-md h-full w-full rounded-xl p-6 items-center">
               <div className="flex flex-row space-x-3 w-full border-b-[1px] rounded-sm border-gray-300 pb-4 h-1/6">
                 <div className="avatar online w-1/4">
                   <div className="w-24 h-24 rounded-full">
@@ -211,7 +234,9 @@ const DashboardPage = () => {
                   <h3 className="font-semibold text-lg text-black">
                     {user.user_.firstName} {user.user_.lastName}
                   </h3>
-                  <h3 className="text-caribbean-700 font-semibold">Novice</h3>
+                  <h3 className="text-harvest_gold-700 font-semibold">
+                    Novice
+                  </h3>
 
                   <h3 className="text-black font-semibold mt-2">
                     <span className="bg-gray-400 p-1 px-2 rounded-xl text-white shadow-md">
@@ -220,7 +245,7 @@ const DashboardPage = () => {
                   </h3>
                 </div>
               </div>
-              <div className="h-4/6 w-full">
+              <div className="h-full w-full">
                 <CustomCalendar />
               </div>
             </div>

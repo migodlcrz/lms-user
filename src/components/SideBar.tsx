@@ -22,12 +22,12 @@ const Sidebar = () => {
     <div className="sticky flex top-0 h-screen z-50">
       <div
         onClick={() => !isOpen && toggleSidebar()}
-        className={`flex items-start transition-all duration-300 bg-[#1c1c1c] z-50 ${
+        className={`flex items-start transition-all duration-300 bg-oslo_gray-950 z-50 ${
           isOpen ? "w-80" : "w-20"
         }`}
       >
         <div className="w-full">
-          <div className="flex flex-row items-center space-x-4 p-4 w-full shadow-md bg-gradient-to-r from-caribbean-500 via-caribbean-700 to-caribbean-900">
+          <div className="flex flex-row items-center space-x-4 p-4 w-full shadow-md bg-poly-bg-yellow h-20">
             <button
               className="text-white hover:text-black text-2xl z-50 mx-3 transition-colors duration-300"
               onClick={toggleSidebar}
@@ -58,9 +58,9 @@ const Sidebar = () => {
               }}
               className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/dashboard"
-                  ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
+                  ? "text-white bg-gradient-to-r from-harvest_gold-300 via-harvest_gold-500 to-harvest_gold-700 shadow-xl"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
+                    "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">
@@ -78,11 +78,11 @@ const Sidebar = () => {
                   setIsOpen(true);
                 }
               }}
-              className={`flex flex-row items-center space-x-4 px-2 py-1 w-full rounded-xl text-white transition-colors duration-300 ${
+              className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/courses"
-                  ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
+                  ? "text-white bg-gradient-to-r from-harvest_gold-300 via-harvest_gold-500 to-harvest_gold-700 shadow-xl"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
+                    "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">
@@ -102,9 +102,9 @@ const Sidebar = () => {
               }}
               className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
                 currentPath === "/settings"
-                  ? "bg-gradient-to-r from-caribbean-300 via-caribbean-500 to-caribbean-700"
+                  ? "text-white bg-gradient-to-r from-harvest_gold-300 via-harvest_gold-500 to-harvest_gold-700 shadow-xl"
                   : isOpen &&
-                    "hover:bg-gradient-to-r hover:from-gray-100 hover:via-gray-300 hover:to-gray-500 hover:text-black"
+                    "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
               }`}
             >
               <li className="grid place-items-center py-2 h-12 text-4xl relative">

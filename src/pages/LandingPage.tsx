@@ -22,6 +22,9 @@ import {
   SlSocialSpotify,
   SlSocialTwitter,
 } from "react-icons/sl";
+import blob from "../images/blob.svg";
+import reading from "../images/reading-man-clear.png";
+import readingMan from "../images/landing-icon.svg";
 
 const LandingInfo = () => {
   const navigate = useNavigate();
@@ -31,20 +34,20 @@ const LandingInfo = () => {
       <div className="flex flex-col h-screen overflow-hidden">
         <Header />
         <div
-          className="flex flex-col lg:flex-row justify-center w-full h-4/5 shadow-xl bg-cream text-center space-y-4 px-8 lg:px-10"
-          style={{
-            backgroundImage: `url(${heroimage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
+          className="flex flex-col lg:flex-row justify-center w-full h-full shadow-xl bg-poly-bg bg-cover bg-center text-center space-y-4 px-8 lg:px-10"
+          // style={{
+          //   backgroundImage: `url(${heroimage})`,
+          //   backgroundSize: "cover",
+          //   backgroundPosition: "center",
+          // }}
         >
-          <div className="flex flex-col w-full space-y-6 justify-center items-start">
+          <div className="flex flex-row w-full space-y-6 items-center">
             <div className="flex flex-col items-start w-1/2 space-y-4">
               <h1 className="text-start text-white text-2xl lg:text-6xl">
-                <span className="text-caribbean-50 font-semibold">
+                <span className="text-white font-bold">
                   Fly Toward Your Goals with
                 </span>{" "}
-                <span className="text-caribbean-300 text-shadow shadow-black">
+                <span className="text-harvest_gold text-shadow shadow-black">
                   Learnify
                 </span>
               </h1>
@@ -59,23 +62,32 @@ const LandingInfo = () => {
                 >
                   <button
                     onClick={() => navigate("/register")}
-                    className="btn bg-gradient-to-b from-caribbean-500 to-caribbean-600 hover:bg-caribbean-300 shadow-md shadow-black border-cerulean"
+                    className="btn bg-harvest_gold border-harvest_gold hover:bg-harvest_gold-400 hover:border-harvest_gold-400 shadow-md shadow-black"
                   >
-                    <p className="text-black font-bold text-md lg:text-xl">
-                      Start Now
+                    <p className="text-white font-bold text-md lg:text-xl">
+                      Get Started
                     </p>
                   </button>
                 </motion.div>
               </div>
             </div>
+            <div className="flex flex-col items-center justify-center w-1/2 h-full space-y-4">
+              <div className="image-container h-[70%] w-[70%]  relative">
+                <img
+                  src={readingMan}
+                  className=" h-full w-full absolute top-0 left-0"
+                  alt="Reading icon"
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <div className="flex flex-row justify-center items-center h-1/5 w-full bg-gradient-to-r from-caribbean-500 to-caribbean-700">
+        {/* <div className="flex flex-row justify-center items-center h-1/5 w-full bg-poly-bg bg-cover bg-center">
           <div className="flex flex-col items-center justify-evenly w-full h-full">
-            <h2 className="text-xl font-bold text-black">
+            <h2 className="text-xl font-bold text-white">
               Powered by collaboration with
             </h2>
-            <div className="flex flex-row w-full justify-center items-center space-x-12 text-caribbean-900 text-3xl">
+            <div className="flex flex-row w-full justify-center items-center space-x-12 text-white text-3xl">
               <span className="">
                 <SlSocialFacebook />
               </span>
@@ -96,36 +108,12 @@ const LandingInfo = () => {
               </span>
             </div>
           </div>
-          {/* <div className="w-2/5 h-full relative hidden lg:block">
-          <Carousel
-            showArrows={false}
-            autoPlay={true}
-            interval={1500}
-            infiniteLoop={true}
-            showThumbs={false}
-            showIndicators={false}
-            showStatus={false}
-          >
-            <div>
-              <img src={dmitri} alt="Banner" width={1200} height={300} />
-            </div>
-            <div>
-              <img src={guy} alt="Banner" width={1200} height={300} />
-            </div>
-            <div>
-              <img src={noriel} alt="Banner" width={1200} height={300} />
-            </div>
-            <div>
-              <img src={guy2} alt="Banner" width={1200} height={300} />
-            </div>
-          </Carousel>
         </div> */}
-        </div>
       </div>
       <div className="flex flex-col h-screen overflow-hidden">
-        <div className="flex h-1/4 bg-white relative p-2">
-          <div className=" flex flex-row space-x-6 absolute w-[95%] h-full bottom-0 left-1/2 translate-y-[15%] translate-x-[-50%]">
-            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+        <div className="flex h-1/4 bg-oslo_gray-200 relative p-2 shadow-inner shadow-black">
+          <div className=" flex flex-row space-x-6 absolute w-[95%] h-full bottom-0 left-1/2 translate-y-[15%] translate-x-[-50%] shadow-xl">
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-xl shadow-black p-4">
               <div className="flex justify-center h-full w-1/4 p-2">
                 <h2>
                   <Lottie animationData={book} className="w-full h-full" />
@@ -141,7 +129,7 @@ const LandingInfo = () => {
                 </p>
               </div>
             </div>
-            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-xl shadow-black p-4">
               <div className="flex justify-center h-full w-1/4 p-2">
                 <h2>
                   <Lottie animationData={savings} className="w-full h-full" />
@@ -157,7 +145,7 @@ const LandingInfo = () => {
                 </p>
               </div>
             </div>
-            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-2xl p-4">
+            <div className="flex flex-row bg-slate-50 w-1/3 h-full rounded-xl shadow-xl shadow-black p-4">
               <div className="flex justify-center h-full w-1/4 p-2">
                 <h2>
                   <Lottie animationData={time} className="w-full h-full" />
@@ -173,7 +161,7 @@ const LandingInfo = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-start pt-14 h-3/4 bg-gradient-to-r from-caribbean-500 to-caribbean-700">
+        <div className="flex flex-col items-center justify-start pt-14 h-3/4 bg-poly-bg bg-cover bg-center">
           <div>
             <h1 className="font-semibold text-black">Popular Courses</h1>
           </div>

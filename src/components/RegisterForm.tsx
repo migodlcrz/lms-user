@@ -88,7 +88,7 @@ const RegisterForm = () => {
             // router.push("/");
             navigate("/");
           }}
-          className="text-4xl text-caribbean hover:text-harvest_gold-300
+          className="text-4xl text-oslo_gray hover:text-harvest_gold-300
           "
         >
           <MdKeyboardArrowLeft />
@@ -102,7 +102,7 @@ const RegisterForm = () => {
           <input
             type="text"
             placeholder="First Name"
-            className="input-md border-caribbean border-2 shadow-md rounded-xl w-1/2"
+            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2"
             data-testid=""
             value={regForm.firstName}
             onChange={(e) => {
@@ -112,7 +112,7 @@ const RegisterForm = () => {
           <input
             type="text"
             placeholder="Last Name"
-            className="input-md border-caribbean border-2 shadow-md rounded-xl w-1/2"
+            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2"
             data-testid=""
             value={regForm.lastName}
             onChange={(e) => {
@@ -123,7 +123,7 @@ const RegisterForm = () => {
         <input
           type="text"
           placeholder="Email"
-          className="input-md border-caribbean border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray border-2 shadow-md rounded-xl"
           data-testid=""
           value={regForm.email}
           onChange={(e) => {
@@ -133,7 +133,7 @@ const RegisterForm = () => {
         <input
           type={seePassword ? "text" : "password"}
           placeholder="Password"
-          className="input-md border-caribbean border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray border-2 shadow-md rounded-xl"
           data-testid=""
           value={regForm.password}
           onChange={(e) => {
@@ -143,7 +143,7 @@ const RegisterForm = () => {
         <div className="flex flex-row items-center text-sm">
           <input
             type="checkbox"
-            className="checkbox checkbox-xs mr-2 border-caribbean"
+            className="checkbox checkbox-xs mr-2 border-oslo_gray"
             onClick={() => {
               setSeePassword(!seePassword);
             }}
@@ -151,7 +151,7 @@ const RegisterForm = () => {
           <p>Show Password</p>
         </div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
-          <button className="btn bg-gradient-to-b from-caribbean-500 to-caribbean-600 text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl">
+          <button className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl">
             {loading ? (
               <span className="loading loading-spinner loading-sm" />
             ) : (
@@ -163,17 +163,20 @@ const RegisterForm = () => {
         </motion.div>
       </form>
       <div className="w-full text-start mt-2 text-sm lg;text-md">
-        <a className="text-sm mt-3 text-center" href={"/login"}>
+        <button
+          className="text-sm mt-3 text-center"
+          onClick={() => navigate("/login")}
+        >
           {"Already have an account?"}{" "}
-          <span className="text-caribbean-700 hover:text-caribbean-900 font-bold">
+          <span className="text-oslo_gray-700 hover:text-oslo_gray-900 font-bold">
             Login
           </span>
-        </a>
+        </button>
       </div>
       <div className="flex justify-center items-center w-full gap-3 py-3">
-        <div className="border-b-2 border-caribbean-800 py-2 w-full px-6"></div>
-        <div className="mt-3 text-caribbean-800">or</div>
-        <div className="border-b-2 border-caribbean-800 py-2 w-full px-6"></div>
+        <div className="border-b-2 border-oslo_gray-800 py-2 w-full px-6"></div>
+        <div className="mt-3 text-oslo_gray-800">or</div>
+        <div className="border-b-2 border-oslo_gray-800 py-2 w-full px-6"></div>
       </div>
       <div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>

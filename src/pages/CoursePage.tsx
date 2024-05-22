@@ -1,318 +1,147 @@
-// import React, { useEffect, useState } from "react";
-// import Modal from "react-responsive-modal";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// interface Course {
-//   _id?: string;
-//   courseID: string;
-//   courseName: string;
-// }
-
-// const CoursePage = () => {
-//   const [courses, setCourses] = useState<Course[] | null>(null);
-//   const [profile, setProfile] = useState<Course | null>(null);
-//   const [openModal, setOpenModal] = useState<boolean>(false);
-
-//   const [loading, setLoading] = useState<boolean>(false);
-
-//   const [courseForm, setCourseForm] = useState<Course>({
-//     courseID: "",
-//     courseName: "",
-//   });
-
-//   const fetchCourse = async () => {
-//     const response = await fetch("http://localhost:4000/api/course", {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-
-//     const courses = await response.json();
-
-//     if (response.ok) {
-//       setCourses(courses);
-//     } else {
-//       console.log("RESPONSE NOT OK");
-//     }
-//   };
-
-//   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const { name, value } = e.target;
-//     setCourseForm((prevState) => ({
-//       ...prevState,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     console.log("COURSE ID: ", courseForm.courseID);
-//     console.log("COURSE NAME: ", courseForm.courseName);
-//     const response = await fetch("http://localhost:4000/api/course/create", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(courseForm),
-//     });
-
-//     const json = await response.json();
-
-//     setLoading(false);
-//     clearForm();
-//     setOpenModal(false);
-
-//     if (response.ok) {
-//       toast.success(json.message);
-//       fetchCourse();
-//     } else {
-//       toast.error(json.error);
-//     }
-//   };
-
-//   const handleDelete = async (_id: string) => {
-//     const response = await fetch(
-//       `http://localhost:4000/api/course/delete/${_id}`,
-//       {
-//         method: "DELETE",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-
-//     const json = await response.json();
-
-//     if (response.ok) {
-//       toast.success(json.message);
-
-//       setProfile(null);
-//       fetchCourse();
-//     } else {
-//       console.log(json.error);
-//     }
-//   };
-
-//   const clearForm = () => {
-//     setCourseForm({
-//       courseID: "",
-//       courseName: "",
-//     });
-//   };
-
-//   useEffect(() => {
-//     fetchCourse();
-//   }, []);
-
-//   return (
-//     <div className="flex flex-col space-y-2 lg:space-y-0 pl-[90px] p-2 bg-white h-screen">
-//       <div className="flex flex-col lg:flex-row justify-start py-2">
-//         <h2 className="font-bold text-cerulean">Course Management</h2>
-//       </div>
-//       <div className="flex flex-col lg:flex-row h-full space-y-4 lg:space-y-0 lg:space-x-4">
-//         <div className="flex flex-col items-start shadow-xl border-2 border-black w-full lg:w-1/2 h-full">
-//           {courses ? (
-//             <>
-//               <div className="flex bg-cerulean w-full p-2 ">
-//                 <div className="flex flex-row space-x-3">
-//                   <label className="input input-bordered flex items-center gap-2 rounded-none">
-//                     <input
-//                       type="text"
-//                       className="grow"
-//                       placeholder="Search Course"
-//                     />
-//                     <svg
-//                       xmlns="http://www.w3.org/2000/svg"
-//                       viewBox="0 0 16 16"
-//                       fill="currentColor"
-//                       className="w-4 h-4 opacity-70"
-//                     >
-//                       <path
-//                         fill-rule="evenodd"
-//                         d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-//                         clip-rule="evenodd"
-//                       />
-//                     </svg>
-//                   </label>
-//                   <button className="btn rounded-none bg-white text-cerulean">
-//                     Search
-//                   </button>{" "}
-//                   <button
-//                     onClick={() => {
-//                       setOpenModal(true);
-//                     }}
-//                     className="btn rounded-none bg-white text-cerulean"
-//                   >
-//                     Add
-//                   </button>
-//                   <Modal
-//                     open={openModal}
-//                     onClose={() => {
-//                       setOpenModal(false);
-//                     }}
-//                     center
-//                   >
-//                     <div className="flex flex-col mt-10 space-y-2">
-//                       <form
-//                         className="flex flex-col form space-y-2"
-//                         onSubmit={handleSubmit}
-//                       >
-//                         <p className="text-black">Course ID:</p>
-//                         <input
-//                           onChange={handleFormChange}
-//                           className="input input-bordered input-primary rounded-none"
-//                           type="text"
-//                           name="courseID"
-//                           value={courseForm.courseID}
-//                           disabled={loading}
-//                         />
-//                         <p className="text-black">Course Name:</p>
-//                         <input
-//                           onChange={handleFormChange}
-//                           className="input input-bordered input-primary rounded-none"
-//                           type="text"
-//                           name="courseName"
-//                           value={courseForm.courseName}
-//                           disabled={loading}
-//                         />
-//                         <button
-//                           className="btn rounded-none bg-cerulean text-white"
-//                           type="submit"
-//                           disabled={loading}
-//                         >
-//                           {loading ? (
-//                             <div className="grid place-items-center h-full w-full">
-//                               <span className="loading loading-spinner loading-lg"></span>
-//                             </div>
-//                           ) : (
-//                             <>Add course</>
-//                           )}
-//                         </button>
-//                       </form>
-//                     </div>
-//                   </Modal>
-//                 </div>
-//               </div>
-//               <div className="flex flex-row w-full m-0 bg-cerulean max-h-full overflow-x-auto">
-//                 <table className="table">
-//                   <thead className="sticky top-0 bg-cerulean shadow-md">
-//                     <tr className="text-white">
-//                       <th className="font-bold text-lg">Course</th>
-//                       <th className="font-bold text-lg">ID</th>
-//                       <th className="font-bold text-lg">Name</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody>
-//                     {courses &&
-//                       courses.map((course, index) => (
-//                         <tr
-//                           onClick={() => {
-//                             setProfile(course);
-//                           }}
-//                           className={`hover:bg-gray-500 cursor-pointer ${
-//                             index % 2 === 0 ? "bg-white" : "bg-slate-300"
-//                           } ${profile === course ? "bg-gray-500" : ""}`}
-//                         >
-//                           <th>{index + 1}</th>
-//                           <td className="font-bold">{course.courseID}</td>
-//                           <td>{course.courseName}</td>
-//                         </tr>
-//                       ))}
-//                   </tbody>
-//                 </table>
-//               </div>
-//             </>
-//           ) : (
-//             <div className="grid place-items-center h-full w-full">
-//               <span className="loading loading-spinner loading-lg"></span>
-//             </div>
-//           )}
-//         </div>
-//         <div className="flex h-auto w-full lg:w-1/2 bg-white border-2 border-slate-400 shadow-md p-3">
-//           {profile ? (
-//             <div className="flex flex-col w-full h-full ">
-//               <div className="flex flex-col h-full w-full bg-slate-200 p-2 space-y-2">
-//                 <div className="flex flex-row w-full justify-between">
-//                   <label className=" font-bold text-2xl w-1/2">
-//                     {"Course ID: "}
-//                     <span className="font-normal">{profile.courseID}</span>
-//                   </label>
-//                   <label className="font-bold text-2xl">
-//                     Course Name:{" "}
-//                     <span className="font-normal">{profile.courseName}</span>
-//                   </label>
-//                 </div>
-//                 <p className="text-black">Modules</p>
-//                 <div className="bg-white shadow-inner w-full h-full p-2"></div>
-//                 <p className="text-black">Students</p>
-//                 <div className="bg-white shadow-inner w-full h-full p-2"></div>
-//                 <div className="flex flex-row items-end justify-center space-x-[10%]">
-//                   <button className="btn w-20 rounded-none text-cerulean">
-//                     Edit
-//                   </button>
-//                   <button
-//                     onClick={() => {
-//                       handleDelete(String(profile._id));
-//                     }}
-//                     className="btn w-20 rounded-none text-cerulean"
-//                   >
-//                     Delete
-//                   </button>
-//                   <button
-//                     onClick={() => {
-//                       setProfile(null);
-//                     }}
-//                     className="btn w-20 rounded-none text-cerulean"
-//                   >
-//                     Close
-//                   </button>
-//                 </div>
-//               </div>
-//             </div>
-//           ) : (
-//             <div className="grid place-items-center h-full w-full bg-slate-400">
-//               <p className="text-black font-bold text-xl">No selected course</p>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CoursePage;
-
-import React from "react";
+import Lottie from "lottie-react";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Pie,
+  PieChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import CustomCalendar from "../components/Calendar";
 import { useAuthContext } from "../hooks/useAuthContext";
+import animation from "../images/online.json";
+// import "rsuite/dist/rsuite.min.css";
 
-const CoursePage = () => {
+const data = [
+  {
+    subject: "Math",
+    A: 87,
+    fullMark: 100,
+  },
+  {
+    subject: "Chinese",
+    A: 50,
+    fullMark: 100,
+  },
+  {
+    subject: "English",
+    A: 86,
+    fullMark: 100,
+  },
+  {
+    subject: "Geography",
+    A: 99,
+    fullMark: 100,
+  },
+  {
+    subject: "Physics",
+    A: 85,
+    fullMark: 100,
+  },
+  {
+    subject: "History",
+    A: 65,
+    fullMark: 100,
+  },
+];
+
+const DashboardPage = () => {
   const { user } = useAuthContext();
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
-      <div className="h-full bg-red-400 z-0 p-6">
-        <div className="flex flex-col lg:flex-row h-full w-full">
-          <div className="w-full lg:w-2/3 bg-blue-400 h-full">
-            <div className="flex flex-col w-full h-[10%]">
-              <h1 className="text-black text-4xl">
-                Good Day,{" "}
-                <span className="text-caribbean-600">
-                  {user.user_.firstName}
-                </span>
-              </h1>
-              <h3 className="text-gray-500 font-normal text-sm">
-                Here is your profile overview
-              </h3>
+      {/* <div className="h-14 shadow-lg z-10">hello</div> */}
+      <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
+        <div className="w-2/3">
+          {/* Good day */}
+          {/* <div className="flex flex-col w-full h-[7%]">
+            <h1 className="text-white text-4xl">
+              Here are your{" "}
+              <span className="text-harvest_gold-600">Courses</span>
+            </h1>
+          </div> */}
+          <div className="flex flex-col h-full w-full pr-6 space-y-6">
+            <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
+              <div className="flex flex-row items-center w-full border-b-2 border-oslo_gray-300 py-2">
+                <h2 className="font-bold text-harvest_gold-500 text-3xl border-r-2 border-oslo_gray-300 pr-3 mr-3">
+                  Course List
+                </h2>
+                <p className="text-black font-semibold">
+                  These are your track records for your courses!
+                </p>
+              </div>
+              <div className="flex flex-col w-full h-full">
+                <div className="flex flex-col w-full h-1/3 pb-3">
+                  <div className="w-full h-1/6 font-bold text-black">
+                    You're almost finished on this three courses, don't stop
+                    now!
+                  </div>
+                  <div className="flex flex-row w-full h-5/6 space-x-3">
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
+                      <p className="font-semibold text-white">Not Started</p>
+                      <h3 className="text-white font-bold text-5xl">10</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
+                      <p className="font-semibold text-white">In Progress</p>{" "}
+                      <h3 className="text-white font-bold text-5xl">12</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
+                      <p className="font-semibold text-white">Finished</p>{" "}
+                      <h3 className="text-white font-bold text-5xl">15</h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex w-full h-2/3"></div>
+              </div>
             </div>
-            <div className="bg-orange-400 h-[90%]">girl</div>
           </div>
-          <div className="w-full lg:w-1/3 bg-green-400 h-full">hello</div>
+        </div>
+
+        <div className="flex flex-row h-full w-1/3">
+          <div className="h-full w-full">
+            {/* Profile */}
+            <div className="flex flex-col space-y-3 bg-oslo_gray-50 shadow-md h-full w-full rounded-xl p-6 items-center">
+              <div className="flex flex-row space-x-3 w-full border-b-[1px] rounded-sm border-gray-300 pb-4 h-1/6">
+                <div className="avatar online w-1/4">
+                  <div className="w-24 h-24 rounded-full">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col w-3/4">
+                  <h3 className="font-semibold text-lg text-black">
+                    {user.user_.firstName} {user.user_.lastName}
+                  </h3>
+                  <h3 className="text-harvest_gold-700 font-semibold">
+                    Novice
+                  </h3>
+
+                  <h3 className="text-black font-semibold mt-2">
+                    <span className="bg-gray-400 p-1 px-2 rounded-xl text-white shadow-md">
+                      Total Points: 200
+                    </span>
+                  </h3>
+                </div>
+              </div>
+              <div className="h-full w-full">
+                <CustomCalendar />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default CoursePage;
+export default DashboardPage;
