@@ -19,6 +19,7 @@ import {
 import CustomCalendar from "../components/Calendar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import animation from "../images/online.json";
+import { useState } from "react";
 // import "rsuite/dist/rsuite.min.css";
 
 const data = [
@@ -56,6 +57,8 @@ const data = [
 
 const DashboardPage = () => {
   const { user } = useAuthContext();
+  const [swap, setSwap] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
@@ -99,7 +102,18 @@ const DashboardPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-full h-2/3"></div>
+                <div className="flex flex-col w-full h-2/3">
+                  <div className="flex items-center px-3 h-20 w-full bg-gradient-to-r from-oslo_gray-400 to-oslo_gray-500 rounded-xl shadow-lg">
+                    <input
+                      onClick={() => {
+                        setSwap(!swap);
+                      }}
+                      type="checkbox"
+                      className="toggle toggle-lg"
+                      checked={swap}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
