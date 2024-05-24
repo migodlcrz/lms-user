@@ -19,6 +19,11 @@ import {
 import CustomCalendar from "../components/Calendar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import animation from "../images/online.json";
+import { IoStorefront } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 // import "rsuite/dist/rsuite.min.css";
 
 const data = [
@@ -56,6 +61,7 @@ const data = [
 
 const DashboardPage = () => {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
@@ -77,93 +83,38 @@ const DashboardPage = () => {
           {/* Course progress */}
           <div className="flex flex-col h-[90%] w-full pr-6 space-y-6">
             <div className="flex flex-row h-28 bg-gradient-to-l items-center shadow-md from-harvest_gold-400 via-harvest_gold-500 to-harvest_gold-600 rounded-xl py-3 px-7">
-              <p className="text-harvest_gold-50 font-bold w-4/5 text-xs md:text-xl">
-                You are doing great! So far you have completed 60% of your
-                courses. Keep up the good job!
+              <p className="text-harvest_gold-50 font-bold w-4/5 text-xs md:text-xl text-black">
+                Learn to Fly! Explore our vast selection of courses and unlock
+                your potential today!{" "}
               </p>
-              <div className="w-1/5">
-                <Lottie animationData={animation} className="mb-20" />
+              <div className="relative w-1/5">
+                <Lottie
+                  animationData={animation}
+                  className="absolute w-60 right-0 bottom-0"
+                />
+                <div>.</div>
+                <div>.</div>
+                <div>.</div>
               </div>
             </div>
             <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
-              <div className="flex flex-row items-center w-full border-b-2 border-oslo_gray-300 py-2">
+              <div className="flex flex-row items-center justify-between w-full border-b-2 border-oslo_gray-300 py-2">
                 <h2 className="font-bold text-harvest_gold-500 text-3xl  pr-3 mr-3">
                   Course Progress
                 </h2>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => {
+                    navigate("/store");
+                  }}
+                  className="btn rounded-xl flex justify-center items-center bg-gradient-to-r from-harvest_gold-500 to-harvest_gold-600"
+                >
+                  <h2 className="flex flex-row items-center justify-center space-x-4 font-semibold text-white text-xl">
+                    View courses in store
+                  </h2>
+                </motion.div>
               </div>
-              {/* <div className="flex flex-row w-full h-full">
-                <div className="flex flex-col space-y-5 w-1/5">
-                  <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md p-3">
-                    <p className="font-semibold text-gray-400">Courses</p>
-                    <h3 className="text-black font-bold text-5xl">10</h3>
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md p-3">
-                    <p className="font-semibold text-gray-400">Modules</p>{" "}
-                    <h3 className="text-black font-bold text-5xl">12</h3>
-                  </div>
-                  <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md p-3">
-                    <p className="font-semibold text-gray-400">Quizzes</p>{" "}
-                    <h3 className="text-black font-bold text-5xl">15</h3>
-                  </div>
-                </div>
-                <div className="w-4/5 h-full p-2">
-                  <div className="h-[50%] w-[50%]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        width={500}
-                        height={300}
-                        data={data}
-                        margin={{
-                          top: 5,
-                          right: 30,
-                          left: 20,
-                          bottom: 5,
-                        }}
-                        barSize={20}
-                      >
-                        <XAxis
-                          dataKey="name"
-                          scale="point"
-                          padding={{ left: 10, right: 10 }}
-                        />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <Bar
-                          dataKey="pv"
-                          fill="#00c496"
-                          background={{ fill: "#eee" }}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <div className="h-[50%] w-[50%]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart width={400} height={400}>
-                        <Pie
-                          data={data01}
-                          dataKey="value"
-                          cx="50%"
-                          cy="50%"
-                          outerRadius={60}
-                          fill="#8884d8"
-                        />
-                        <Pie
-                          data={data02}
-                          dataKey="value"
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={70}
-                          outerRadius={90}
-                          fill="#82ca9d"
-                          label
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
-              </div> */}
               <div className="flex flex-col w-full h-full">
                 <div className="flex flex-col w-full h-1/3 pb-3">
                   <div className="w-full h-1/6 font-bold text-black">

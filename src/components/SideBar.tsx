@@ -7,6 +7,7 @@ import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logo from "../images/learnify-white.png";
+import { IoCartOutline } from "react-icons/io5";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true); // Track whether sidebar is open or closed

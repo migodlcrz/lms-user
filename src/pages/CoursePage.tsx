@@ -61,16 +61,8 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
-      {/* <div className="h-14 shadow-lg z-10">hello</div> */}
       <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
         <div className="w-2/3">
-          {/* Good day */}
-          {/* <div className="flex flex-col w-full h-[7%]">
-            <h1 className="text-white text-4xl">
-              Here are your{" "}
-              <span className="text-harvest_gold-600">Courses</span>
-            </h1>
-          </div> */}
           <div className="flex flex-col h-full w-full pr-6 space-y-6">
             <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
               <div className="flex flex-row items-center w-full border-b-2 border-oslo_gray-300 py-2">

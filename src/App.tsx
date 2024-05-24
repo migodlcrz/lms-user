@@ -12,6 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import SettingsPage from "./pages/SettingsPage";
+import StorePage from "./pages/StorePage";
 
 function App() {
   return (
@@ -40,6 +41,10 @@ function AppContent() {
         <Route
           path="/register"
           element={!user ? <RegisterPage /> : <Navigate to="/dashboard" />}
+        />
+        <Route
+          path="/store"
+          element={user ? <StorePage /> : <Navigate to="/no-access" />}
         />
         <Route
           path="/dashboard"
