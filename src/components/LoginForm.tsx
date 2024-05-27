@@ -99,7 +99,7 @@ const LoginForm = () => {
         <input
           type="text"
           placeholder="Email"
-          className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl bg-white"
           data-testid=""
           value={loginForm.email}
           onChange={(e) => {
@@ -109,7 +109,7 @@ const LoginForm = () => {
         <input
           type={seePassword ? "text" : "password"}
           placeholder="Password"
-          className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl bg-white"
           data-testid=""
           value={loginForm.password}
           onChange={(e) => {
@@ -127,9 +127,16 @@ const LoginForm = () => {
           <p className="text-black font-semibold">Show Password</p>
         </div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
-          <button className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl">
+          <button
+            onClick={() => {
+              setLoading(true);
+            }}
+            className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl"
+          >
             {loading ? (
-              <span className="loading loading-spinner loading-sm" />
+              <div className="grid place-items-center h-full w-full">
+                <span className="loading loading-spinner loading-lg"></span>
+              </div>
             ) : (
               <span className="text-lg lg:text-md text-white font-bold">
                 Login

@@ -102,7 +102,7 @@ const RegisterForm = () => {
           <input
             type="text"
             placeholder="First Name"
-            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2"
+            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2 bg-white"
             data-testid=""
             value={regForm.firstName}
             onChange={(e) => {
@@ -112,7 +112,7 @@ const RegisterForm = () => {
           <input
             type="text"
             placeholder="Last Name"
-            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2"
+            className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2 bg-white"
             data-testid=""
             value={regForm.lastName}
             onChange={(e) => {
@@ -123,7 +123,7 @@ const RegisterForm = () => {
         <input
           type="text"
           placeholder="Email"
-          className="input-md border-oslo_gray border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray border-2 shadow-md rounded-xl bg-white"
           data-testid=""
           value={regForm.email}
           onChange={(e) => {
@@ -133,7 +133,7 @@ const RegisterForm = () => {
         <input
           type={seePassword ? "text" : "password"}
           placeholder="Password"
-          className="input-md border-oslo_gray border-2 shadow-md rounded-xl"
+          className="input-md border-oslo_gray border-2 shadow-md rounded-xl bg-white"
           data-testid=""
           value={regForm.password}
           onChange={(e) => {

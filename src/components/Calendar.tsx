@@ -256,7 +256,7 @@ const CustomCalendar: React.FC = () => {
                     setAddlist(e.target.value);
                   }}
                   value={addList}
-                  className="input border-[0.5px] border-harvest_gold h-6 px-2 w-full mt-2"
+                  className="input border-[0.5px] border-harvest_gold h-6 px-2 w-full mt-2 bg-white"
                 />
               </form>
             )}

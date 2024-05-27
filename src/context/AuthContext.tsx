@@ -61,6 +61,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   });
 
   useEffect(() => {
+    console.log("PUMASOK");
     const user: string | null = JSON.parse(
       localStorage.getItem("user") || "null"
     );
@@ -68,6 +69,9 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     const token: string | null = JSON.parse(
       localStorage.getItem("user-token") || "null"
     );
+
+    console.log(user);
+    console.log(token);
 
     if (!user || !token) {
       dispatch({ type: "LOGOUT" });

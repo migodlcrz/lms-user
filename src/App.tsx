@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import SettingsPage from "./pages/SettingsPage";
 import StorePage from "./pages/StorePage";
+import CourseDetail from "./components/CourseDetail";
 
 function App() {
   return (
@@ -44,7 +45,21 @@ function AppContent() {
         />
         <Route
           path="/store"
-          element={user ? <StorePage /> : <Navigate to="/no-access" />}
+          element={
+            <div className="flex flex-row">
+              {user && <Sidebar />}
+              <StorePage />
+            </div>
+          }
+        />
+        <Route
+          path="/store/course/:courseId"
+          element={
+            <div className="flex flex-row">
+              {user && <Sidebar />}
+              <CourseDetail />
+            </div>
+          }
         />
         <Route
           path="/dashboard"
