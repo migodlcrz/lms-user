@@ -5,10 +5,12 @@ import { User } from "../interfaces/UserInterface";
 import { Course } from "../interfaces/CourseInterface";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
   const { user } = useAuthContext();
   const port = process.env.REACT_APP_URL;
+  const navigate = useNavigate();
   const [swap, setSwap] = useState<boolean>(false);
   const [userProfile, setUserProfile] = useState<User | null>(null);
   const [userCourses, setUserCourses] = useState<Course[] | null>(null);
@@ -138,6 +140,9 @@ const DashboardPage = () => {
                               onMouseLeave={(e) =>
                                 (e.currentTarget.style.opacity = "1")
                               }
+                              onClick={() => {
+                                navigate(`/courses/${course._id}`);
+                              }}
                               className="flex flex-col w-64 h-64 bg-poly-bg-yellow rounded-xl m-1 p-3 cursor-pointer"
                             >
                               <p>{course.courseName}</p>
@@ -176,6 +181,9 @@ const DashboardPage = () => {
                               onMouseLeave={(e) =>
                                 (e.currentTarget.style.opacity = "1")
                               }
+                              onClick={() => {
+                                navigate(`/courses/${course._id}`);
+                              }}
                               className="flex flex-row items-center space-x-3 justify-between w-full bg-poly-bg-yellow rounded-xl my-1 p-3 cursor-pointer"
                             >
                               <p className="text-white font-bold">

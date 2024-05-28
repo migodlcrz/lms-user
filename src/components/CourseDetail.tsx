@@ -7,7 +7,6 @@ import DetailPanel from "./DetailPanel";
 import ModulePanel from "./ModulePanel";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { isJSDocNamepathType } from "typescript";
 
 const CourseDetail = () => {
   const port = process.env.REACT_APP_URL;
