@@ -57,12 +57,12 @@ const StorePage = () => {
               onClick={() => handleBadgeClick(0)}
             />
             <CategoryBadge
-              category="Programming"
+              category="Artificial Intelligence"
               isSelected={selectedBadge === 1}
               onClick={() => handleBadgeClick(1)}
             />
             <CategoryBadge
-              category="Programming"
+              category="Analytics"
               isSelected={selectedBadge === 2}
               onClick={() => handleBadgeClick(2)}
             />
