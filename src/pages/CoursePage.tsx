@@ -1,63 +1,75 @@
-import Lottie from "lottie-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Pie,
-  PieChart,
-  PolarAngleAxis,
-  PolarGrid,
-  PolarRadiusAxis,
-  Radar,
-  RadarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { useEffect, useState } from "react";
 import CustomCalendar from "../components/Calendar";
 import { useAuthContext } from "../hooks/useAuthContext";
-import animation from "../images/online.json";
-import { useState } from "react";
-// import "rsuite/dist/rsuite.min.css";
-
-const data = [
-  {
-    subject: "Math",
-    A: 87,
-    fullMark: 100,
-  },
-  {
-    subject: "Chinese",
-    A: 50,
-    fullMark: 100,
-  },
-  {
-    subject: "English",
-    A: 86,
-    fullMark: 100,
-  },
-  {
-    subject: "Geography",
-    A: 99,
-    fullMark: 100,
-  },
-  {
-    subject: "Physics",
-    A: 85,
-    fullMark: 100,
-  },
-  {
-    subject: "History",
-    A: 65,
-    fullMark: 100,
-  },
-];
+import { User } from "../interfaces/UserInterface";
+import { Course } from "../interfaces/CourseInterface";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const DashboardPage = () => {
   const { user } = useAuthContext();
+  const port = process.env.REACT_APP_URL;
   const [swap, setSwap] = useState<boolean>(false);
+  const [userProfile, setUserProfile] = useState<User | null>(null);
+  const [userCourses, setUserCourses] = useState<Course[] | null>(null);
+
+  const fetchUser = async () => {
+    try {
+      const response = await fetch(`${port}/api/user/${user.user_._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        return toast.error(json.error);
+      }
+
+      setUserProfile(json);
+    } catch (error) {
+      toast.error("Failed to fetch user profile.");
+    }
+  };
+
+  const fetchCourses = async (courseIds: any[]) => {
+    console.log(courseIds);
+    try {
+      const courses = await Promise.all(
+        courseIds.map(async (courseId) => {
+          const response = await fetch(`${port}/api/course/${courseId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) {
+            const json = await response.json();
+            throw new Error(json.error);
+          }
+
+          return response.json();
+        })
+      );
+
+      setUserCourses(courses);
+    } catch (error) {
+      toast.error("Failed to fetch courses.");
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    if (userProfile && userProfile.courses) {
+      fetchCourses(userProfile.courses);
+    }
+  }, [userProfile]);
 
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
@@ -73,38 +85,125 @@ const DashboardPage = () => {
                   These are your track records for your courses!
                 </p>
               </div>
-              <div className="flex flex-col w-full h-full">
-                <div className="flex flex-col w-full h-1/3 pb-3">
+              <div className="flex flex-col w-full h-full space-y-3 overflow-hidden">
+                <div className="flex flex-col w-full h-1/3 pb-3 space-y-3">
                   <div className="w-full h-1/6 font-bold text-black">
                     You're almost finished on this three courses, don't stop
                     now!
                   </div>
-                  <div className="flex flex-row w-full h-5/6 space-x-3">
+                  <div className="flex flex-row w-full h-4/6 space-x-3">
                     <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
-                      <p className="font-semibold text-white">Not Started</p>
-                      <h3 className="text-white font-bold text-5xl">10</h3>
+                      <p className="font-semibold text-white">Total Courses</p>
+                      <h3 className="text-white font-bold text-5xl">
+                        {userCourses && userCourses.length}
+                      </h3>
                     </div>
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
-                      <p className="font-semibold text-white">In Progress</p>{" "}
-                      <h3 className="text-white font-bold text-5xl">12</h3>
+                    <div className="flex flex-col items-start justify-start w-1/3 text-black h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold">Not Started</p>
+                      <h3 className="font-bold text-5xl">0</h3>
                     </div>
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
-                      <p className="font-semibold text-white">Finished</p>{" "}
-                      <h3 className="text-white font-bold text-5xl">15</h3>
+                    <div className="flex flex-col items-start justify-start w-1/3 text-black h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold ">In Progress</p>{" "}
+                      <h3 className=" font-bold text-5xl">0</h3>
+                    </div>
+                    <div className="flex flex-col items-start justify-start w-1/3 text-black h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
+                      <p className="font-semibold">Finished</p>{" "}
+                      <h3 className="font-bold text-5xl">0</h3>
+                    </div>
+                  </div>
+                  <div className="flex flex-col h-1/6 w-full">
+                    <div className="flex items-center p-2 w-full bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 rounded-3xl shadow-lg">
+                      <input
+                        onClick={() => {
+                          setSwap(!swap);
+                        }}
+                        type="checkbox"
+                        className="toggle toggle-lg"
+                        checked={swap}
+                      />
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col w-full h-2/3">
-                  <div className="flex items-center px-3 h-20 w-full bg-gradient-to-r from-oslo_gray-400 to-oslo_gray-500 rounded-xl shadow-lg">
-                    <input
-                      onClick={() => {
-                        setSwap(!swap);
-                      }}
-                      type="checkbox"
-                      className="toggle toggle-lg"
-                      checked={swap}
-                    />
-                  </div>
+                <div className="h-2/3 overflow-hidden">
+                  {swap ? (
+                    <div className="flex flex-wrap w-full h-full overflow-y-scroll">
+                      {userCourses &&
+                        userCourses.map((course, index) => {
+                          return (
+                            <motion.div
+                              whileTap={{ scale: 0.9 }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.opacity = "0.7")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.opacity = "1")
+                              }
+                              className="flex flex-col w-64 h-64 bg-poly-bg-yellow rounded-xl m-1 p-3 cursor-pointer"
+                            >
+                              <p>{course.courseName}</p>
+                              <div
+                                className={`badge 
+                                  ${
+                                    course.tier === "Free" &&
+                                    "bg-black text-white font-semibold"
+                                  } 
+                                  ${
+                                    course.tier === "Basic" &&
+                                    "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
+                                  }
+                                  ${
+                                    course.tier === "Premium" &&
+                                    "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold text-black"
+                                  }
+                                `}
+                              >
+                                <p>{course.tier}</p>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                    </div>
+                  ) : (
+                    <div className="flex flex-col w-full h-full overflow-y-scroll px-3">
+                      {userCourses &&
+                        userCourses.map((course, index) => {
+                          return (
+                            <motion.div
+                              whileTap={{ scale: 0.9 }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.opacity = "0.7")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.opacity = "1")
+                              }
+                              className="flex flex-row items-center space-x-3 justify-between w-full bg-poly-bg-yellow rounded-xl my-1 p-3 cursor-pointer"
+                            >
+                              <p className="text-white font-bold">
+                                {course.courseName}
+                              </p>
+                              <div
+                                className={`badge 
+                                  ${
+                                    course.tier === "Free" &&
+                                    "bg-black text-white font-semibold"
+                                  } 
+                                  ${
+                                    course.tier === "Basic" &&
+                                    "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
+                                  }
+                                  ${
+                                    course.tier === "Premium" &&
+                                    "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold text-black"
+                                  }
+                                `}
+                              >
+                                <p>{course.tier}</p>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

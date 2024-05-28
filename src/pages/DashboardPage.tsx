@@ -1,28 +1,20 @@
+import { motion } from "framer-motion";
 import Lottie from "lottie-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Pie,
-  PieChart,
   PolarAngleAxis,
   PolarGrid,
   PolarRadiusAxis,
   Radar,
   RadarChart,
   ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
 } from "recharts";
 import CustomCalendar from "../components/Calendar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import animation from "../images/online.json";
-import { IoStorefront } from "react-icons/io5";
-import { IoCartOutline } from "react-icons/io5";
-import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { User } from "../interfaces/UserInterface";
+import { toast } from "react-toastify";
 
 // import "rsuite/dist/rsuite.min.css";
 
@@ -61,7 +53,31 @@ const data = [
 
 const DashboardPage = () => {
   const { user } = useAuthContext();
+  const port = process.env.REACT_APP_URL;
   const navigate = useNavigate();
+  const [userProfile, setUserProfile] = useState<User | null>(null);
+
+  const fetchUser = async () => {
+    const response = await fetch(`${port}/api/user/${user.user_._id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      return toast.error(json.error);
+    }
+
+    setUserProfile(json);
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
@@ -72,7 +88,7 @@ const DashboardPage = () => {
             <h1 className="text-white text-4xl">
               Good Day,{" "}
               <span className="text-harvest_gold-600">
-                {user.user_.firstName}
+                {userProfile && userProfile.firstName}
               </span>
             </h1>
             <h3 className="text-white font-semibold text-sm">
@@ -123,19 +139,21 @@ const DashboardPage = () => {
                   <div className="flex flex-row w-full h-5/6 space-x-3">
                     <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
                       <p className="font-semibold text-white">Total Courses</p>
-                      <h3 className="text-white font-bold text-5xl">10</h3>
+                      <h3 className="text-white font-bold text-5xl">
+                        {userProfile && userProfile.courses.length}
+                      </h3>
                     </div>
                     <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
                       <p className="font-semibold text-black">Not Started</p>
-                      <h3 className="text-black font-bold text-5xl">10</h3>
+                      <h3 className="text-black font-bold text-5xl">0</h3>
                     </div>
                     <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
                       <p className="font-semibold text-black">In Progress</p>{" "}
-                      <h3 className="text-black font-bold text-5xl">12</h3>
+                      <h3 className="text-black font-bold text-5xl">0</h3>
                     </div>
                     <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
                       <p className="font-semibold text-black">Finished</p>{" "}
-                      <h3 className="text-black font-bold text-5xl">15</h3>
+                      <h3 className="text-black font-bold text-5xl">0</h3>
                     </div>
                   </div>
                 </div>
@@ -183,7 +201,8 @@ const DashboardPage = () => {
                 </div>
                 <div className="flex flex-col w-3/4">
                   <h3 className="font-semibold text-lg text-black">
-                    {user.user_.firstName} {user.user_.lastName}
+                    {userProfile && userProfile.firstName}{" "}
+                    {userProfile && userProfile.lastName}
                   </h3>
                   <h3 className="text-harvest_gold-700 font-semibold">
                     Novice

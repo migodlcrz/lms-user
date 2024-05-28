@@ -6,11 +6,17 @@ import image from "../images/guy.png";
 import DetailPanel from "./DetailPanel";
 import ModulePanel from "./ModulePanel";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { isJSDocNamepathType } from "typescript";
 
 const CourseDetail = () => {
   const port = process.env.REACT_APP_URL;
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: string }>();
+
+  // console.log("COURSE ID: ", courseId);
+  // console.log("COURSE USER: ", user.user_._id);
 
   const [course, setCourse] = useState<Course | null>(null);
 
@@ -29,6 +35,25 @@ const CourseDetail = () => {
     }
     console.log(json);
     setCourse(json);
+  };
+
+  const enrollUser = async () => {
+    const response = await fetch(
+      `${port}/api/user/enroll/${user.user_._id}/${courseId}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    const json = await response.json();
+
+    if (!response.ok) {
+      return toast.error(json.error);
+    }
+
+    toast.success(json.message);
+    navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -57,7 +82,12 @@ const CourseDetail = () => {
               </div>
               <div className="flex flex-row items-center justify-between">
                 <h1 className="text-black">{course.courseName}</h1>
-                <button className="btn bg-harvest_gold rounded-xl hover:bg-harvest_gold-600 hover:border:bg_harvest_gold-600">
+                <button
+                  onClick={() => {
+                    enrollUser();
+                  }}
+                  className="btn bg-harvest_gold rounded-xl hover:bg-harvest_gold-600 hover:border:bg_harvest_gold-600"
+                >
                   <h2 className="test-black text-2xl font-bold">Enroll Now</h2>
                 </button>
               </div>

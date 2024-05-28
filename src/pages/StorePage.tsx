@@ -134,7 +134,7 @@ const StorePage = () => {
             <>
               {" "}
               <div
-                className="flex flex-wrap h-full bg-white rounded-xl w-3/4 overflow-y-scroll p-3"
+                className="flex flex-wrap h-full bg-white rounded-xl w-3/4 overflow-y-scroll p-3 content-start"
                 style={{
                   scrollbarColor: "#2f2100 #eca400",
                   scrollbarWidth: "thin",
@@ -157,7 +157,7 @@ const StorePage = () => {
                           onClick={() => {
                             navigate(`/store/course/${course._id}`);
                           }}
-                          className="w-64 h-64 rounded-xl bg-poly-bg-yellow shadow-xl mr-3 bg-opacity-50"
+                          className="w-64 h-64 rounded-xl bg-poly-bg-yellow shadow-xl m-1 bg-opacity-50"
                         >
                           <div className="flex flex-col justify-between items-center bg-transparent h-full w-full p-2">
                             <div className="flex flex-row space-x-1 w-full">

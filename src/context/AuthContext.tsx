@@ -61,7 +61,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   });
 
   useEffect(() => {
-    console.log("PUMASOK");
     const user: string | null = JSON.parse(
       localStorage.getItem("user") || "null"
     );
