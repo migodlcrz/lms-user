@@ -43,8 +43,8 @@ const StorePage = () => {
         <div className="flex flex-row space-x-6 w-full py-3">
           {courses ? (
             <>
-              <div className="w-1/4 h-full bg-white rounded-xl">
-                Go back to Profile
+              <div className="w-1/4 h-full bg-white rounded-xl p-3">
+                Profile of user
               </div>
             </>
           ) : (

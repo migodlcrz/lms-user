@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import { MdOutlineLibraryBooks } from "react-icons/md";
+import { MdOutlineLibraryBooks, MdOutlineShoppingCart } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
@@ -90,6 +90,28 @@ const Sidebar = () => {
                 <MdOutlineLibraryBooks />
               </li>
               {isOpen && <p className="font-bold text-sm w-full">My Courses</p>}
+            </button>
+            <button
+              // disabled={!isOpen}
+              onClick={() => {
+                if (isOpen) {
+                  navigate("/store");
+                  setIsOpen(false);
+                } else {
+                  setIsOpen(true);
+                }
+              }}
+              className={`flex flex-row items-center space-x-4 px-2 w-full rounded-xl text-white transition-colors duration-300 ${
+                currentPath === "/store"
+                  ? "text-white bg-gradient-to-r from-harvest_gold-300 via-harvest_gold-500 to-harvest_gold-700 shadow-xl"
+                  : isOpen &&
+                    "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
+              }`}
+            >
+              <li className="grid place-items-center py-2 h-12 text-4xl relative">
+                <MdOutlineShoppingCart />
+              </li>
+              {isOpen && <p className="font-bold text-sm w-full">Store</p>}
             </button>
             <button
               // disabled={!isOpen}
