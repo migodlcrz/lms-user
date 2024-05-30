@@ -184,7 +184,7 @@ const DashboardPage = () => {
                               onClick={() => {
                                 navigate(`/courses/${course._id}`);
                               }}
-                              className="flex flex-row items-center space-x-3 justify-between w-full bg-poly-bg-yellow rounded-xl my-1 p-3 cursor-pointer"
+                              className="flex flex-row items-center space-x-3 justify-between w-full bg-harvest_gold shadow-md rounded-xl my-1 p-3 cursor-pointer"
                             >
                               <p className="text-white font-bold">
                                 {course.courseName}
