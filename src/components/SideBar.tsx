@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logo from "../images/learnify-white.png";
 import { IoCartOutline } from "react-icons/io5";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // Track whether sidebar is open or closed
@@ -85,6 +86,7 @@ const Sidebar = () => {
                     : isOpen &&
                       "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
                 }`}
+                data-testid="on-going-courses"
               >
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <MdOutlineLibraryBooks />
@@ -109,11 +111,35 @@ const Sidebar = () => {
                     : isOpen &&
                       "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
                 }`}
+                data-testid="available-courses"
               >
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <MdOutlineShoppingCart />
                 </li>
                 {isOpen && <p className="font-bold text-sm w-full">Store</p>}
+              </button>
+              <button
+                // disabled={!isOpen}
+                onClick={() => {
+                  if (isOpen) {
+                    navigate("/pricing");
+                    setIsOpen(false);
+                  } else {
+                    setIsOpen(true);
+                  }
+                }}
+                className={`flex flex-row items-center space-x-4 px-2 w-full text-white rounded-xl transition-colors duration-300 ${
+                  currentPath === "/pricing"
+                    ? "text-yellow-400"
+                    : isOpen &&
+                      "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
+                }`}
+                data-testid="subscription-plan"
+              >
+                <li className="grid place-items-center py-2 h-12 text-4xl relative">
+                  <AiOutlineDollarCircle />
+                </li>
+                {isOpen && <p className="font-bold text-sm w-full">Pricing</p>}
               </button>
             </ul>
             <ul className="flex flex-col p-3 space-y-6 bg-harvest_gold">
@@ -133,6 +159,7 @@ const Sidebar = () => {
                     : isOpen &&
                       "hover:text-white hover:bg-gradient-to-r hover:from-harvest_gold-100 hover:via-harvest_gold-300 hover:to-harvest_gold-500"
                 }`}
+                data-testid="student-profile"
               >
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <CgProfile />

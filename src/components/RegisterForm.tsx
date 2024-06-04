@@ -79,7 +79,10 @@ const RegisterForm = () => {
   });
 
   return (
-    <div className="flex flex-col h-full justify-center px-40 bg-slate-50">
+    <div
+      className="flex flex-col h-full justify-center px-40 bg-slate-50"
+      data-testid="register-page"
+    >
       {/* <div className="grid place-items-center h-screen bg-cream"> */}
       {/* <div className="bg-white shadow-lg p-5 min-w-[60%] border-t-4 border-harvest_gold"> */}
       <div className="flex flex-row">
@@ -103,42 +106,42 @@ const RegisterForm = () => {
             type="text"
             placeholder="First Name"
             className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2 bg-white"
-            data-testid=""
             value={regForm.firstName}
             onChange={(e) => {
               changeHandler("firstName", e.target.value);
             }}
+            data-testid="first-name-register-field"
           />
           <input
             type="text"
             placeholder="Last Name"
             className="input-md border-oslo_gray border-2 shadow-md rounded-xl w-1/2 bg-white"
-            data-testid=""
             value={regForm.lastName}
             onChange={(e) => {
               changeHandler("lastName", e.target.value);
             }}
+            data-testid="last-name-register-field"
           />
         </div>
         <input
           type="text"
           placeholder="Email"
           className="input-md border-oslo_gray border-2 shadow-md rounded-xl bg-white"
-          data-testid=""
           value={regForm.email}
           onChange={(e) => {
             changeHandler("email", e.target.value);
           }}
+          data-testid="email-register-field"
         />
         <input
           type={seePassword ? "text" : "password"}
           placeholder="Password"
           className="input-md border-oslo_gray border-2 shadow-md rounded-xl bg-white"
-          data-testid=""
           value={regForm.password}
           onChange={(e) => {
             changeHandler("password", e.target.value);
           }}
+          data-testid="password-register-field"
         />
         <div className="flex flex-row items-center text-sm">
           <input
@@ -151,7 +154,10 @@ const RegisterForm = () => {
           <p>Show Password</p>
         </div>
         <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>
-          <button className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl">
+          <button
+            className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl"
+            data-testid="register-button"
+          >
             {loading ? (
               <span className="loading loading-spinner loading-sm" />
             ) : (
@@ -183,6 +189,7 @@ const RegisterForm = () => {
           <button
             onClick={() => handleGoogleRegister()}
             className="flex flex-row items-center justify-center space-x-4 border-[0.5px] border-black w-full p-2 rounded-xl hover:bg-gray-500 transition duration-300"
+            data-testid="google-login-button"
           >
             <FcGoogle className="text-4xl" />
             <span className="font-bold text-black">Register with Google</span>

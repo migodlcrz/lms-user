@@ -41,7 +41,7 @@ const StorePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-poly-bg">
+    <div className="flex flex-col h-screen w-full bg-poly-bg bg-center bg-cover">
       <div className="flex flex-col w-full h-full p-6 space-y-6">
         <motion.div
           initial={{ opacity: 0, x: -20 }}

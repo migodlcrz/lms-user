@@ -75,7 +75,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
-      <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
+      <div className="flex flex-row h-full bg-poly-bg bg-center bg-cover z-0 p-6">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}

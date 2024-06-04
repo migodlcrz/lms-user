@@ -78,6 +78,7 @@ const LoginForm = () => {
       //   backgroundSize: "cover",
       //   backgroundPosition: "center",
       // }}
+      data-testid="login-page"
     >
       {/* <div className="grid place-items-center h-screen bg-white">
         <div className="bg-white shadow-lg p-5 min-w-80 border-t-4 border-harvest_gold m-10"> */}
@@ -100,21 +101,21 @@ const LoginForm = () => {
           type="text"
           placeholder="Email"
           className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl bg-white"
-          data-testid=""
           value={loginForm.email}
           onChange={(e) => {
             changeHandler("email", e.target.value);
           }}
+          data-testid="email-login-field"
         />
         <input
           type={seePassword ? "text" : "password"}
           placeholder="Password"
           className="input-md border-oslo_gray-400 border-2 shadow-md rounded-xl bg-white"
-          data-testid=""
           value={loginForm.password}
           onChange={(e) => {
             changeHandler("password", e.target.value);
           }}
+          data-testid="password-login-field"
         />
         <div className="flex flex-row items-center text-sm">
           <input
@@ -132,6 +133,7 @@ const LoginForm = () => {
               setLoading(true);
             }}
             className="btn bg-gradient-to-r from-harvest_gold-400 to-harvest_gold-600 shadow-xl text-white font-bold cursor-pointer py-2 hover:bg-harvest_gold-300 hover:text-slate-200 w-full rounded-xl"
+            data-testid="login-button"
           >
             {loading ? (
               <div className="grid place-items-center h-full w-full">
@@ -168,6 +170,7 @@ const LoginForm = () => {
           <button
             onClick={() => handleGoogleLogin()}
             className="flex flex-row items-center justify-center space-x-4 border-2 border-black w-full p-2 rounded-xl hover:bg-gray-500 transition duration-300"
+            data-testid="google-login-button"
           >
             <FcGoogle className="text-4xl" />
             <span className="font-bold text-black">Sign in with Google</span>

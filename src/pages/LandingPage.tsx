@@ -30,8 +30,10 @@ const LandingInfo = () => {
   const navigate = useNavigate();
   return (
     <>
-      {" "}
-      <div className="flex flex-col h-screen overflow-hidden">
+      <div
+        className="flex flex-col h-screen overflow-hidden"
+        data-testid="landing-page"
+      >
         <Header />
         <div
           className="flex flex-col lg:flex-row justify-center w-full h-full shadow-xl bg-poly-bg bg-cover bg-center text-center space-y-4 px-8 lg:px-10"
@@ -55,7 +57,7 @@ const LandingInfo = () => {
                 Hundreds of online courses, just a click away. Get ready to
                 embark on your learning journey{" "}
               </p>
-              <div>
+              <div className="flex flex-col items-start space-y-1">
                 <motion.div
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 1.1 }}
@@ -63,12 +65,23 @@ const LandingInfo = () => {
                   <button
                     onClick={() => navigate("/register")}
                     className="btn bg-harvest_gold border-harvest_gold hover:bg-harvest_gold-400 hover:border-harvest_gold-400 shadow-md shadow-black"
+                    data-testid="signup-button"
                   >
                     <p className="text-white font-bold text-md lg:text-xl">
                       Get Started
                     </p>
                   </button>
                 </motion.div>
+                <p
+                  onClick={() => navigate("/login")}
+                  className="text-white text-xs"
+                  data-testid="login-button"
+                >
+                  Already have an account?{" "}
+                  <span className="text-harvest_gold border-b-[0.5px] border-harvest_gold cursor-pointer hover:text-harvest_gold-400 hover:border-harvest_gold-400 transition-color duration-300">
+                    Click here
+                  </span>
+                </p>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center w-1/2 h-full space-y-4">

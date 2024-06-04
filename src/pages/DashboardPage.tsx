@@ -81,7 +81,7 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       {/* <div className="h-14 shadow-lg z-10">hello</div> */}
-      <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
+      <div className="flex flex-row h-full bg-poly-bg bg-center bg-cover z-0 p-6">
         <div className="w-2/3">
           {/* Good day */}
           <div className="flex flex-col w-full h-[10%]">

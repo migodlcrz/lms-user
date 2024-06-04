@@ -15,6 +15,7 @@ import SettingsPage from "./pages/SettingsPage";
 import StorePage from "./pages/StorePage";
 import CourseDetail from "./components/CourseDetail";
 import UserCourse from "./components/UserCourse";
+import PricingPage from "./pages/PricingPage";
 
 function App() {
   return (
@@ -94,6 +95,19 @@ function AppContent() {
             user ? (
               <div className="flex flex-row">
                 <UserCourse />
+              </div>
+            ) : (
+              <Navigate to="/no-access" />
+            )
+          }
+        />
+        <Route
+          path="/pricing"
+          element={
+            user ? (
+              <div className="flex flex-row">
+                <Sidebar />
+                <PricingPage />
               </div>
             ) : (
               <Navigate to="/no-access" />
