@@ -27,6 +27,11 @@ const UserCourse = () => {
       return toast.error(json.error);
     }
 
+    if (!json.isPublished) {
+      navigate("/courses");
+      toast.error("Course not published.");
+    }
+
     setCourse(json);
   };
 
