@@ -76,7 +76,11 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       <div className="flex flex-row h-full bg-poly-bg z-0 p-6">
-        <div className="w-2/3">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="w-2/3"
+        >
           <div className="flex flex-col h-full w-full pr-6 space-y-6">
             <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
               <div className="flex flex-row items-center w-full border-b-2 border-oslo_gray-300 py-2">
@@ -128,48 +132,14 @@ const DashboardPage = () => {
                 </div>
                 <div className="h-2/3 overflow-hidden">
                   {swap ? (
-                    <div className="flex flex-wrap w-full h-full overflow-y-scroll">
-                      {userCourses &&
-                        userCourses.map((course, index) => {
-                          return (
-                            <motion.div
-                              whileTap={{ scale: 0.9 }}
-                              onMouseEnter={(e) =>
-                                (e.currentTarget.style.opacity = "0.7")
-                              }
-                              onMouseLeave={(e) =>
-                                (e.currentTarget.style.opacity = "1")
-                              }
-                              onClick={() => {
-                                navigate(`/courses/${course._id}`);
-                              }}
-                              className="flex flex-col w-64 h-64 bg-poly-bg-yellow rounded-xl m-1 p-3 cursor-pointer"
-                            >
-                              <p>{course.courseName}</p>
-                              <div
-                                className={`badge 
-                                  ${
-                                    course.tier === "Free" &&
-                                    "bg-black text-white font-semibold"
-                                  } 
-                                  ${
-                                    course.tier === "Basic" &&
-                                    "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
-                                  }
-                                  ${
-                                    course.tier === "Premium" &&
-                                    "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold text-black"
-                                  }
-                                `}
-                              >
-                                <p>{course.tier}</p>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-                    </div>
-                  ) : (
-                    <div className="flex flex-col w-full h-full overflow-y-scroll px-3">
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      className="flex flex-col w-full h-full overflow-y-scroll px-3"
+                    >
                       {userCourses &&
                         userCourses.map((course, index) => {
                           return (
@@ -210,15 +180,67 @@ const DashboardPage = () => {
                             </motion.div>
                           );
                         })}
-                    </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      className="flex flex-wrap w-full h-full overflow-y-scroll"
+                    >
+                      {userCourses &&
+                        userCourses.map((course, index) => {
+                          return (
+                            <motion.div
+                              whileTap={{ scale: 0.9 }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.opacity = "0.7")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.opacity = "1")
+                              }
+                              onClick={() => {
+                                navigate(`/courses/${course._id}`);
+                              }}
+                              className="flex flex-col w-64 h-64 bg-poly-bg-yellow rounded-xl m-1 p-3 cursor-pointer"
+                            >
+                              <p>{course.courseName}</p>
+                              <div
+                                className={`badge 
+                              ${
+                                course.tier === "Free" &&
+                                "bg-black text-white font-semibold"
+                              } 
+                              ${
+                                course.tier === "Basic" &&
+                                "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
+                              }
+                              ${
+                                course.tier === "Premium" &&
+                                "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold text-black"
+                              }
+                            `}
+                              >
+                                <p>{course.tier}</p>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                    </motion.div>
                   )}
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-row h-full w-1/3">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="flex flex-row h-full w-1/3"
+        >
           <div className="h-full w-full">
             {/* Profile */}
             <div className="flex flex-col space-y-3 bg-oslo_gray-50 shadow-md h-full w-full rounded-xl p-6 items-center">
@@ -251,7 +273,7 @@ const DashboardPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

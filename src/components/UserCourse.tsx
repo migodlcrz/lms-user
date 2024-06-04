@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Course } from "../interfaces/CourseInterface";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { IoArrowBack } from "react-icons/io5";
+import { motion } from "framer-motion";
 
 const UserCourse = () => {
   const { user } = useAuthContext();
@@ -55,8 +57,23 @@ const UserCourse = () => {
   }, []);
 
   return (
-    <div className="bg-poly-bg-yellow w-screen h-screen bg-center bg-cover p-6">
-      <div className="flex flex-col w-full h-full rounded-xl bg-white p-3">
+    <div className="flex flex-row space-x-6 bg-poly-bg-yellow w-screen h-screen bg-center bg-cover p-6">
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        animate={{
+          opacity: 1,
+          x: 0,
+        }}
+        className="flex flex-col w-1/4 h-full rounded-xl bg-white p-3"
+      >
+        <button
+          onClick={() => {
+            navigate("/courses");
+          }}
+          className="text-3xl text-black hover:text-harvest_gold transition-color duration-200"
+        >
+          <IoArrowBack />
+        </button>
         <div className="text-black font-bold">
           Name: {course && course.courseName}
         </div>
@@ -67,11 +84,21 @@ const UserCourse = () => {
           onClick={() => {
             unEnroll();
           }}
-          className="btn text-black font-bold"
+          className="btn text-white font-bold bg-red-600"
         >
           Unenroll
         </button>
-      </div>
+      </motion.div>{" "}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        animate={{
+          opacity: 1,
+          x: 0,
+        }}
+        className="flex flex-col w-3/4 h-full rounded-xl bg-white p-3"
+      >
+        hello
+      </motion.div>
     </div>
   );
 };

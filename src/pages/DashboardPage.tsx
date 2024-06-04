@@ -118,68 +118,54 @@ const DashboardPage = () => {
                 <h2 className="font-bold text-harvest_gold-500 text-3xl  pr-3 mr-3">
                   Course Progress
                 </h2>
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => {
-                    navigate("/store");
-                  }}
-                  className="btn rounded-xl flex justify-center items-center bg-gradient-to-r from-harvest_gold-500 to-harvest_gold-600"
-                >
-                  <h2 className="flex flex-row items-center justify-center space-x-4 font-semibold text-white text-xl">
-                    View courses in store
-                  </h2>
-                </motion.div>
               </div>
               <div className="flex flex-col w-full h-full">
-                <div className="flex flex-col w-full h-1/3 pb-3">
-                  <div className="w-full h-1/6 font-bold text-black">
-                    Courses Status
-                  </div>
-                  <div className="flex flex-row w-full h-5/6 space-x-3">
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md bg-poly-bg-yellow rounded-xl p-3">
-                      <p className="font-semibold text-white">Total Courses</p>
-                      <h3 className="text-white font-bold text-5xl">
+                <div className="flex flex-row w-full h-full space-x-3">
+                  <div className="flex flex-col w-1/3 h-full space-y-3">
+                    <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md bg-harvest_gold-700 border-4 border-dashed border-harvest_gold rounded-xl p-3">
+                      <p className="font-semibold text-black">Total Courses</p>
+                      <h3 className="text-black font-bold text-5xl">
                         {userProfile && userProfile.courses.length}
                       </h3>
                     </div>
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
-                      <p className="font-semibold text-black">Not Started</p>
-                      <h3 className="text-black font-bold text-5xl">0</h3>
+                    <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md bg-harvest_gold-700 border-4 border-dashed border-harvest_gold rounded-xl p-3">
+                      <p className="font-semibold text-black">Mastery</p>
+                      <h3 className="text-black font-bold text-5xl">
+                        Geography
+                      </h3>
                     </div>
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
-                      <p className="font-semibold text-black">In Progress</p>{" "}
-                      <h3 className="text-black font-bold text-5xl">0</h3>
-                    </div>
-                    <div className="flex flex-col items-start justify-start w-1/3 h-full shadow-md border-2 border-dashed border-harvest_gold bg-harvest_gold-700 rounded-xl p-3">
-                      <p className="font-semibold text-black">Finished</p>{" "}
-                      <h3 className="text-black font-bold text-5xl">0</h3>
+                    <div
+                      onClick={() => {
+                        navigate("/store");
+                      }}
+                      className="flex flex-col cursor-pointer items-center justify-center w-full h-1/3 shadow-md bg-poly-bg-yellow rounded-xl p-3 hover:opacity-70 text-white hover:text-black transition-all duration-200"
+                    >
+                      <h3 className="font-bold text-4xl">Shop Courses</h3>
                     </div>
                   </div>
-                </div>
-                <div className="flex w-full h-2/3">
-                  <div className=" h-full w-1/2">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <RadarChart
-                        cx="50%"
-                        cy="50%"
-                        outerRadius="80%"
-                        data={data}
-                      >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="subject" />
-                        <PolarRadiusAxis />
-                        <Radar
-                          name="Mike"
-                          dataKey="A"
-                          stroke="#8d6300"
-                          fill="#eca400"
-                          fillOpacity={0.5}
-                        />
-                      </RadarChart>
-                    </ResponsiveContainer>
+                  <div className="flex w-2/3 items-center justify-center h-full">
+                    <div className="flex justify-center items-center h-full w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <RadarChart
+                          cx="50%"
+                          cy="50%"
+                          outerRadius="80%"
+                          data={data}
+                        >
+                          <PolarGrid />
+                          <PolarAngleAxis dataKey="subject" />
+                          <PolarRadiusAxis />
+                          <Radar
+                            name="Mike"
+                            dataKey="A"
+                            stroke="#8d6300"
+                            fill="#eca400"
+                            fillOpacity={0.5}
+                          />
+                        </RadarChart>
+                      </ResponsiveContainer>
+                    </div>
                   </div>
-                  <div className="h-full w-1/2 py-2"></div>
                 </div>
               </div>
             </div>
