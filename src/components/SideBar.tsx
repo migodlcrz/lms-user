@@ -21,7 +21,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sticky flex top-0 h-screen z-50">
+    <div className="sticky flex top-0 h-screen z-50" data-testid="sidebar-page">
       <div
         onClick={() => toggleSidebar()}
         className={`flex items-start transition-all h-full duration-300 bg-oslo_gray-950 z-50 cursor-pointer ${

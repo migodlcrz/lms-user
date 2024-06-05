@@ -35,14 +35,7 @@ const LandingInfo = () => {
         data-testid="landing-page"
       >
         <Header />
-        <div
-          className="flex flex-col lg:flex-row justify-center w-full h-full shadow-xl bg-poly-bg bg-cover bg-center text-center space-y-4 px-8 lg:px-10"
-          // style={{
-          //   backgroundImage: `url(${heroimage})`,
-          //   backgroundSize: "cover",
-          //   backgroundPosition: "center",
-          // }}
-        >
+        <div className="flex flex-col lg:flex-row justify-center w-full h-full shadow-xl bg-poly-bg bg-cover bg-center text-center space-y-4 px-8 lg:px-10">
           <div className="flex flex-row w-full space-y-6 items-center">
             <div className="flex flex-col items-start w-1/2 space-y-4">
               <h1 className="text-start text-white text-2xl lg:text-6xl">
@@ -85,7 +78,7 @@ const LandingInfo = () => {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center w-1/2 h-full space-y-4">
-              <div className="image-container h-[70%] w-[70%]  relative">
+              <div className="image-container h-[80%] w-[80%]  relative">
                 <img
                   src={readingMan}
                   className=" h-full w-full absolute top-0 left-0"

@@ -72,6 +72,7 @@ const SettingsPage = () => {
             <button
               onClick={() => setOpenDeleteModal(false)}
               className="btn text-black text-2xl font-semibold "
+              data-testid="cancel"
             >
               Cancel
             </button>
@@ -81,6 +82,7 @@ const SettingsPage = () => {
                 deleteUser();
               }}
               className="btn bg-black text-white text-2xl font-semibold bg-fuchsia border-fuchsia hover:bg-red-600 hover:border-red-600 shadow-md"
+              data-testid="proceed"
             >
               Delete
             </button>
