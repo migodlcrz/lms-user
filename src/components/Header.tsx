@@ -24,10 +24,22 @@ const Header = () => {
 
   return (
     <div className="navbar w-full p-8 lg:p-3 h-20 fixed top-0 z-50 transition duration-300">
-      <h1 className="flex-1 font-bold text-white text-3xl">
+      <motion.h1
+        initial={{ opacity: 0, x: -30 }}
+        animate={{
+          opacity: 1,
+          x: 0,
+          transition: {
+            type: "spring",
+            duration: 1,
+            bounce: 0.4,
+          },
+        }}
+        className="flex-1 font-bold text-white text-3xl"
+      >
         <img src={logo} alt="Loading" width="50" height="50" />
         Learnify
-      </h1>
+      </motion.h1>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-2 space-x-1">
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 1.1 }}>

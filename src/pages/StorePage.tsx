@@ -44,8 +44,16 @@ const StorePage = () => {
     <div className="flex flex-col h-screen w-full bg-poly-bg bg-center bg-cover">
       <div className="flex flex-col w-full h-full p-6 space-y-6">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              type: "spring",
+              duration: 1,
+              bounce: 0.4,
+            },
+          }}
           className="flex flex-row space-x-6 w-full py-3"
         >
           {courses ? (
@@ -83,8 +91,17 @@ const StorePage = () => {
           </div>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              type: "spring",
+              delay: 0.2,
+              duration: 1,
+              bounce: 0.4,
+            },
+          }}
           className="flex flex-row w-full h-full space-x-6 overflow-hidden"
         >
           <div className="flex h-full w-1/4">

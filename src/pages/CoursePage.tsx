@@ -78,7 +78,15 @@ const DashboardPage = () => {
       <div className="flex flex-row h-full bg-poly-bg bg-center bg-cover z-0 p-6">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              type: "spring",
+              duration: 1,
+              bounce: 0.4,
+            },
+          }}
           className="w-2/3"
         >
           <div className="flex flex-col h-full w-full pr-6 space-y-6">
@@ -238,7 +246,16 @@ const DashboardPage = () => {
 
         <motion.div
           initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: {
+              type: "spring",
+              delay: 0.2,
+              duration: 1,
+              bounce: 0.4,
+            },
+          }}
           className="flex flex-row h-full w-1/3"
         >
           <div className="h-full w-full">

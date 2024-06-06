@@ -37,7 +37,19 @@ const LandingInfo = () => {
         <Header />
         <div className="flex flex-col lg:flex-row justify-center w-full h-full shadow-xl bg-poly-bg bg-cover bg-center text-center space-y-4 px-8 lg:px-10">
           <div className="flex flex-row w-full space-y-6 items-center">
-            <div className="flex flex-col items-start w-1/2 space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: {
+                  delay: 0.3,
+                  type: "spring",
+                  duration: 1,
+                },
+              }}
+              className="flex flex-col items-start w-1/2 space-y-4"
+            >
               <h1 className="text-start text-white text-2xl lg:text-6xl">
                 <span className="text-white font-bold">
                   Fly Toward Your Goals with
@@ -76,7 +88,7 @@ const LandingInfo = () => {
                   </span>
                 </p>
               </div>
-            </div>
+            </motion.div>
             <div className="flex flex-col items-center justify-center w-1/2 h-full space-y-4">
               <div className="image-container h-[80%] w-[80%]  relative">
                 <img
