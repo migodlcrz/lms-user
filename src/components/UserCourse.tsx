@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { IoArrowBack } from "react-icons/io5";
 import { motion } from "framer-motion";
+import Guy from "../images/guy.png";
 
 const UserCourse = () => {
   const { user } = useAuthContext();
@@ -12,6 +13,7 @@ const UserCourse = () => {
   const navigate = useNavigate();
   const port = process.env.REACT_APP_URL;
   const [course, setCourse] = useState<Course | null>(null);
+  const [page, setPage] = useState("Modules");
 
   const fetchCourse = async () => {
     const response = await fetch(`${port}/api/course/${courseId}`, {
@@ -79,6 +81,11 @@ const UserCourse = () => {
         >
           <IoArrowBack />
         </button>
+        <img
+          src={Guy}
+          className="w-full h-96 object-cover object-center"
+          alt="Pic"
+        />
         <div className="text-black font-bold">
           Name: {course && course.courseName}
         </div>
@@ -102,7 +109,8 @@ const UserCourse = () => {
         }}
         className="flex flex-col w-3/4 h-full rounded-xl bg-white p-3"
       >
-        hello
+        <h1 className="text-4xl">Modules</h1>
+        <div className="w-full h-full">Module 1, Module 2, Module 3</div>
       </motion.div>
     </div>
   );
