@@ -69,8 +69,8 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       localStorage.getItem("user-token") || "null"
     );
 
-    console.log(user);
-    console.log(token);
+    // console.log(user);
+    // console.log(token);
 
     if (!user || !token) {
       dispatch({ type: "LOGOUT" });
@@ -85,7 +85,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
         localStorage.removeItem("user");
         dispatch({ type: "LOGOUT" });
       } else {
-        console.log("PAYLOAD: ", user);
+        // console.log("PAYLOAD: ", user);
         dispatch({ type: "LOGIN", payload: user });
       }
     } catch (error) {
@@ -95,7 +95,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     }
   }, []);
 
-  console.log("Auth Context State: ", state);
+  // console.log("Auth Context State: ", state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -42,7 +42,7 @@ const StorePage = () => {
 
   return (
     <div className="flex flex-col h-screen w-full bg-poly-bg bg-center bg-cover">
-      <div className="flex flex-col w-full h-full p-6 space-y-6">
+      <div className="flex flex-col w-full h-full">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{
@@ -54,41 +54,38 @@ const StorePage = () => {
               bounce: 0.4,
             },
           }}
-          className="flex flex-row space-x-6 w-full py-3"
+          className="flex flex-col space-y-2 items-center justify-center space-x-6 w-full py-3 h-1/3 bg-harvest_gold"
         >
           {courses ? (
             <>
-              <div className="grid place-items-center w-1/4 h-full bg-harvest_gold rounded-xl p-3">
-                <h2 className="text-black font-bold text-xl">
-                  Browse 1000+ of Courses
-                </h2>
+              <h2 className="text-black font-bold">Browse 1000+ of Courses</h2>
+              <input type="text" className="input w-[50%]" />
+              <div className="flex flex-row space-x-3 w-3/4 py-3 justify-center">
+                <CategoryBadge
+                  category="All"
+                  isSelected={selectedBadge === 0}
+                  onClick={() => handleBadgeClick(0)}
+                />
+                <CategoryBadge
+                  category="Programming"
+                  isSelected={selectedBadge === 1}
+                  onClick={() => handleBadgeClick(1)}
+                />
+                <CategoryBadge
+                  category="Artificial Intelligence"
+                  isSelected={selectedBadge === 2}
+                  onClick={() => handleBadgeClick(2)}
+                />
+                <CategoryBadge
+                  category="Analytics"
+                  isSelected={selectedBadge === 3}
+                  onClick={() => handleBadgeClick(3)}
+                />
               </div>
             </>
           ) : (
             <div className="skeleton w-1/4 h-full"></div>
           )}
-          <div className="flex flex-row space-x-3 w-3/4 py-3">
-            <CategoryBadge
-              category="All"
-              isSelected={selectedBadge === 0}
-              onClick={() => handleBadgeClick(0)}
-            />
-            <CategoryBadge
-              category="Programming"
-              isSelected={selectedBadge === 1}
-              onClick={() => handleBadgeClick(1)}
-            />
-            <CategoryBadge
-              category="Artificial Intelligence"
-              isSelected={selectedBadge === 2}
-              onClick={() => handleBadgeClick(2)}
-            />
-            <CategoryBadge
-              category="Analytics"
-              isSelected={selectedBadge === 3}
-              onClick={() => handleBadgeClick(3)}
-            />
-          </div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -104,71 +101,10 @@ const StorePage = () => {
           }}
           className="flex flex-row w-full h-full space-x-6 overflow-hidden"
         >
-          <div className="flex h-full w-1/4">
-            {courses ? (
-              <>
-                <div className="flex flex-row w-full h-full bg-white rounded-xl shadow-lg p-5">
-                  <div className="flex flex-col w-full h-1/6 border-b border-gray-400">
-                    <h2 className="text-black font-bold text-3xl text-center">
-                      Tier
-                    </h2>
-                    <div className="flex flex-row w-full h-full items-center justify-around">
-                      <div className="flex flex-row items-center space-x-3">
-                        <input
-                          type="radio"
-                          name="tier"
-                          value="All"
-                          // checked={selectedOption === "Basic"}
-                          // onChange={handleOptionChange}
-                          className="radio checked:bg-harvest_gold"
-                        />
-                        <label className="text-black">All</label>
-                      </div>
-                      <div className="flex flex-row items-center space-x-3">
-                        <input
-                          type="radio"
-                          name="tier"
-                          value="Basic"
-                          // checked={selectedOption === "Basic"}
-                          // onChange={handleOptionChange}
-                          className="radio checked:bg-harvest_gold"
-                        />
-                        <label className="text-black">Free</label>
-                      </div>
-                      <div className="flex flex-row items-center space-x-3">
-                        <input
-                          type="radio"
-                          name="tier"
-                          value="Basic"
-                          // checked={selectedOption === "Basic"}
-                          // onChange={handleOptionChange}
-                          className="radio checked:bg-harvest_gold"
-                        />
-                        <label className="text-black">Basic</label>
-                      </div>
-                      <div className="flex flex-row items-center space-x-3">
-                        <input
-                          type="radio"
-                          name="tier"
-                          value="Basic"
-                          // checked={selectedOption === "Basic"}
-                          // onChange={handleOptionChange}
-                          className="radio checked:bg-harvest_gold"
-                        />
-                        <label className="text-black">Premium</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <div className="skeleton w-full h-full" />
-            )}
-          </div>
           {courses ? (
             <>
               <div
-                className="flex flex-wrap h-full bg-white rounded-xl w-3/4 overflow-y-scroll p-3 content-start"
+                className="flex flex-wrap h-full bg-poly-bg bg-cover w-full overflow-y-scroll p-3 content-start"
                 style={{
                   scrollbarColor: "#2f2100 #eca400",
                   scrollbarWidth: "thin",
