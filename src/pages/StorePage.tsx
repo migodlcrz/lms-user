@@ -54,7 +54,7 @@ const StorePage = () => {
               bounce: 0.4,
             },
           }}
-          className="flex flex-col space-y-2 items-center justify-center space-x-6 w-full py-3 h-1/3 bg-harvest_gold"
+          className="flex flex-col space-y-2 items-center justify-center w-full py-3 h-1/3 bg-harvest_gold"
         >
           {courses ? (
             <>
@@ -88,25 +88,18 @@ const StorePage = () => {
           )}
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            x: 0,
-            transition: {
-              type: "spring",
-              delay: 0.2,
-              duration: 1,
-              bounce: 0.4,
-            },
           }}
-          className="flex flex-row w-full h-full space-x-6 overflow-hidden"
+          className="flex flex-row w-full h-full overflow-hidden"
         >
           {courses ? (
             <>
               <div
                 className="flex flex-wrap h-full bg-poly-bg bg-cover w-full overflow-y-scroll p-3 content-start"
                 style={{
-                  scrollbarColor: "#2f2100 #eca400",
+                  scrollbarColor: "#030303 #ebf2ed",
                   scrollbarWidth: "thin",
                 }}
               >
@@ -133,7 +126,7 @@ const StorePage = () => {
                           }}
                         >
                           <div className="flex flex-col justify-between items-center bg-transparent h-full w-full p-3">
-                            <div className="flex flex-row items-center justify-between space-x-1 w-full">
+                            <div className="flex flex-row items-center justify-between w-full">
                               <div
                                 className={`badge 
                    ${

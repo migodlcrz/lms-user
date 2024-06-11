@@ -137,6 +137,9 @@ const CourseDetail = () => {
                     </button>
                   )}
                 </div>
+                <div>
+                  <h2 className="text-bold text-2xl">{course.courseID}</h2>
+                </div>
                 <div className="flex flex-row w-full items-center space-x-2">
                   <div className="rating">
                     <input
