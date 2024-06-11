@@ -44,15 +44,9 @@ const StorePage = () => {
     <div className="flex flex-col h-screen w-full bg-poly-bg bg-center bg-cover">
       <div className="flex flex-col w-full h-full">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            x: 0,
-            transition: {
-              type: "spring",
-              duration: 1,
-              bounce: 0.4,
-            },
           }}
           className="flex flex-col space-y-2 items-center justify-center w-full py-3 h-1/3 bg-harvest_gold"
         >
@@ -109,6 +103,17 @@ const StorePage = () => {
                       course.isPublished && (
                         <motion.div
                           key={index}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{
+                            opacity: 1,
+                            x: 0,
+                            transition: {
+                              type: "spring",
+                              duration: 1,
+                              bounce: 0.4,
+                              delay: 0.2 * index,
+                            },
+                          }}
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           onMouseEnter={() => {
