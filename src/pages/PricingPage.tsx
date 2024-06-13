@@ -5,15 +5,13 @@ import free from "../images/free.json";
 import basic from "../images/basic.json";
 import premium from "../images/premium.json";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate } from "react-router-dom";
 
 const PricingPage = () => {
   const { user } = useAuthContext();
   const port = process.env.REACT_APP_URL;
 
-  const navigate = useNavigate();
-
   const [prices, setPrices] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchPrices = async () => {
     const response = await fetch(`${port}/api/subs/prices`, {
@@ -29,9 +27,6 @@ const PricingPage = () => {
   };
 
   const getSession = async (priceId: String) => {
-    // console.log("price id: ", priceId);
-    // console.log(user.user_.email);
-
     const response = await fetch(`${port}/api/subs/session`, {
       method: "POST",
       headers: {
@@ -44,6 +39,8 @@ const PricingPage = () => {
     });
 
     const json = await response.json();
+
+    setLoading(false);
 
     window.location.href = json.url;
   };
@@ -83,7 +80,11 @@ const PricingPage = () => {
                 </div>
                 <div className=" border-b-[0.5px] border-black w-full py-2">
                   <button className="btn w-full bg-harvest_gold text-black font-bold text-xl">
-                    Subscribe
+                    {loading ? (
+                      <div className="loading loading-spinner"></div>
+                    ) : (
+                      "Subscribe"
+                    )}
                   </button>
                 </div>
                 <div className="flex flex-col justify-between w-full h-1/2 py-3">
@@ -138,6 +139,7 @@ const PricingPage = () => {
                   <div className=" border-b-[0.5px] border-black w-full py-2">
                     <button
                       onClick={() => {
+                        setLoading(true);
                         index === 0 &&
                           getSession("price_1PQte8P9CICrj7zjqMck43zh");
                         index === 1 &&
@@ -145,7 +147,11 @@ const PricingPage = () => {
                       }}
                       className="btn w-full bg-harvest_gold text-black font-bold text-xl"
                     >
-                      Subscribe
+                      {loading ? (
+                        <div className="loading loading-spinner"></div>
+                      ) : (
+                        "Subscribe"
+                      )}
                     </button>
                   </div>
                   <div className="flex flex-col justify-between w-full h-1/2 py-3">
