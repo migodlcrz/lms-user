@@ -114,10 +114,7 @@ const PricingPage = () => {
                   className="flex flex-col w-1/3 h-full bg-white rounded-2xl px-8 py-7 border-8 border-harvest_gold"
                 >
                   <div className="flex flex-col items-center w-full h-1/2">
-                    <h1 className="text-black text-3xl">
-                      {index === 0 && "Basic"}
-                      {index === 1 && "Premium"}
-                    </h1>
+                    <h1 className="text-black text-3xl">{price.nickname}</h1>
                     {index === 0 && (
                       <Lottie className="h-[80%] p-10" animationData={basic} />
                     )}
@@ -140,10 +137,8 @@ const PricingPage = () => {
                     <button
                       onClick={() => {
                         setLoading(true);
-                        index === 0 &&
-                          getSession("price_1PQte8P9CICrj7zjqMck43zh");
-                        index === 1 &&
-                          getSession("price_1PQtdKP9CICrj7zjSNy5InJf");
+                        // console.log(String(price.id));
+                        getSession(String(price.id));
                       }}
                       className="btn w-full bg-harvest_gold text-black font-bold text-xl"
                     >

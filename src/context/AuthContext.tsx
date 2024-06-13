@@ -60,6 +60,24 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     isLoading: true,
   });
 
+  const checkTier = async () => {
+    console.log("USER EMAIL: ", state.user && state.user.user_.email);
+    const port = process.env.REACT_APP_URL;
+    const response = await fetch(`${port}/api/subs/tier`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: state.user && state.user.user_.email,
+      }),
+    });
+
+    const json = await response.json();
+
+    console.log("USER: ", json);
+  };
+
   useEffect(() => {
     const user: string | null = JSON.parse(
       localStorage.getItem("user") || "null"
@@ -68,9 +86,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     const token: string | null = JSON.parse(
       localStorage.getItem("user-token") || "null"
     );
-
-    // console.log(user);
-    // console.log(token);
 
     if (!user || !token) {
       dispatch({ type: "LOGOUT" });
@@ -95,7 +110,15 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (state.user) {
+      checkTier();
+    }
+  }, [state]);
+
   // console.log("Auth Context State: ", state);
+
+  // console.log("USER: ", state.user && state.user.user_.email);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
