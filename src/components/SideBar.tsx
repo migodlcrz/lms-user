@@ -9,6 +9,7 @@ import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import logo from "../images/learnify-white.png";
 import { IoCartOutline } from "react-icons/io5";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // Track whether sidebar is open or closed
@@ -68,7 +69,15 @@ const Sidebar = () => {
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <MdOutlineSpaceDashboard />
                 </li>
-                {isOpen && <p className="font-bold text-sm w-full">Overview</p>}
+                {isOpen && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-bold text-sm w-full"
+                  >
+                    Overview
+                  </motion.p>
+                )}
               </button>
               <button
                 // disabled={!isOpen}
@@ -92,7 +101,13 @@ const Sidebar = () => {
                   <MdOutlineLibraryBooks />
                 </li>
                 {isOpen && (
-                  <p className="font-bold text-sm w-full">My Courses</p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-bold text-sm w-full"
+                  >
+                    My Courses
+                  </motion.p>
                 )}
               </button>
               <button
@@ -116,7 +131,15 @@ const Sidebar = () => {
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <MdOutlineShoppingCart />
                 </li>
-                {isOpen && <p className="font-bold text-sm w-full">Store</p>}
+                {isOpen && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-bold text-sm w-full"
+                  >
+                    Store
+                  </motion.p>
+                )}
               </button>
               <button
                 // disabled={!isOpen}
@@ -139,7 +162,15 @@ const Sidebar = () => {
                 <li className="grid place-items-center py-2 h-12 text-4xl relative">
                   <AiOutlineDollarCircle />
                 </li>
-                {isOpen && <p className="font-bold text-sm w-full">Pricing</p>}
+                {isOpen && (
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-bold text-sm w-full"
+                  >
+                    Pricing
+                  </motion.p>
+                )}
               </button>
             </ul>
             <ul className="flex flex-col p-3 space-y-6 bg-harvest_gold">

@@ -61,7 +61,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
   });
 
   const checkTier = async () => {
-    console.log("USER EMAIL: ", state.user && state.user.user_.email);
     const port = process.env.REACT_APP_URL;
     const response = await fetch(`${port}/api/subs/tier`, {
       method: "POST",
@@ -72,10 +71,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
         email: state.user && state.user.user_.email,
       }),
     });
-
-    const json = await response.json();
-
-    console.log("USER: ", json);
   };
 
   useEffect(() => {
@@ -115,10 +110,6 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
       checkTier();
     }
   }, [state]);
-
-  // console.log("Auth Context State: ", state);
-
-  // console.log("USER: ", state.user && state.user.user_.email);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

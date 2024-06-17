@@ -16,6 +16,7 @@ interface User {
   email: string;
   password: string;
   image: string;
+  tier: string;
   courses: Course[];
   todos: Todo[];
 }

@@ -137,7 +137,7 @@ const DashboardPage = () => {
             <div className="flex flex-col h-full bg-oslo_gray-50 rounded-xl shadow-md p-5 space-y-2">
               <div className="flex flex-row items-center justify-between w-full border-b-2 border-oslo_gray-300 py-2">
                 <h2 className="font-bold text-harvest_gold-500 text-3xl  pr-3 mr-3">
-                  Course Progress
+                  Dashboard
                 </h2>
               </div>
               <div className="flex flex-col w-full h-full">
@@ -150,9 +150,9 @@ const DashboardPage = () => {
                       </h3>
                     </div>
                     <div className="flex flex-col items-start justify-start w-full h-1/3 shadow-md bg-harvest_gold-700 border-4 border-dashed border-harvest_gold rounded-xl p-3">
-                      <p className="font-semibold text-black">Mastery</p>
+                      <p className="font-semibold text-black">Tier</p>
                       <h3 className="text-black font-bold text-5xl">
-                        Geography
+                        {userProfile && userProfile.tier}
                       </h3>
                     </div>
                     <div
