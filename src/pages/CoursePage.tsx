@@ -43,9 +43,6 @@ const DashboardPage = () => {
         courseIds.map(async (courseId) => {
           const response = await fetch(`${port}/api/course/${courseId}`, {
             method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
           });
 
           if (!response.ok) {
@@ -148,27 +145,27 @@ const DashboardPage = () => {
                       }}
                       className="flex flex-col w-full h-full overflow-y-scroll px-3"
                     >
-                      {userCourses &&
-                        userCourses.map((course, index) => {
-                          return (
-                            <motion.div
-                              whileTap={{ scale: 0.9 }}
-                              onMouseEnter={(e) =>
-                                (e.currentTarget.style.opacity = "0.7")
-                              }
-                              onMouseLeave={(e) =>
-                                (e.currentTarget.style.opacity = "1")
-                              }
-                              onClick={() => {
-                                navigate(`/courses/${course._id}`);
-                              }}
-                              className="flex flex-row items-center space-x-3 justify-between w-full bg-harvest_gold shadow-md rounded-xl my-1 p-3 cursor-pointer"
-                            >
-                              <p className="text-white font-bold">
-                                {course.courseName}
-                              </p>
-                              <div
-                                className={`badge 
+                      {userCourses
+                        ? userCourses.map((course, index) => {
+                            return (
+                              <motion.div
+                                whileTap={{ scale: 0.9 }}
+                                onMouseEnter={(e) =>
+                                  (e.currentTarget.style.opacity = "0.7")
+                                }
+                                onMouseLeave={(e) =>
+                                  (e.currentTarget.style.opacity = "1")
+                                }
+                                onClick={() => {
+                                  navigate(`/courses/${course._id}`);
+                                }}
+                                className="flex flex-row items-center space-x-3 justify-between w-full bg-harvest_gold shadow-md rounded-xl my-1 p-3 cursor-pointer"
+                              >
+                                <p className="text-white font-bold">
+                                  {course.courseName}
+                                </p>
+                                <div
+                                  className={`badge 
                                   ${
                                     course.tier === "Free" &&
                                     "bg-black text-white font-semibold"
@@ -182,12 +179,13 @@ const DashboardPage = () => {
                                     "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold text-black"
                                   }
                                 `}
-                              >
-                                <p>{course.tier}</p>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
+                                >
+                                  <p>{course.tier}</p>
+                                </div>
+                              </motion.div>
+                            );
+                          })
+                        : "Loading"}
                     </motion.div>
                   ) : (
                     <motion.div

@@ -16,6 +16,7 @@ import StorePage from "./pages/StorePage";
 import CourseDetail from "./components/CourseDetail";
 import UserCourse from "./components/UserCourse";
 import PricingPage from "./pages/PricingPage";
+import Success from "./components/Success";
 
 function App() {
   return (
@@ -127,6 +128,7 @@ function AppContent() {
             )
           }
         />
+        <Route path="/success" element={<Success />} />
         <Route path="/no-access" element={<NotLoggedIn />} />
         {/* Add a wildcard route for unmatched paths */}
         <Route path="*" element={<NotFound />} />

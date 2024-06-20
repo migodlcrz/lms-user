@@ -15,13 +15,19 @@ const CourseDetail = () => {
   const { user } = useAuthContext();
   const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: string }>();
+  const id = user.user_._id;
+
+  // console.log("USER: ", id);
 
   // console.log("COURSE ID: ", courseId);
   // console.log("COURSE USER: ", user.user_._id);
-
   const [course, setCourse] = useState<Course | null>(null);
   const [page, setPage] = useState("Details");
   const [isEnrolled, setIsEnrolled] = useState<boolean>(false);
+  const [tier, setTier] = useState<string>("");
+
+  // console.log(tier);
+  // console.log(course?.tier);
 
   const fetchCourse = async () => {
     const response = await fetch(`${port}/api/course/${courseId}`, {
@@ -78,8 +84,20 @@ const CourseDetail = () => {
     navigate("/dashboard");
   };
 
+  const getTier = async () => {
+    const response = await fetch(`${port}/api/user/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const json = await response.json();
+
+    setTier(json.tier);
+  };
+
   useEffect(() => {
     fetchCourse();
+    getTier();
   }, []);
 
   return (
@@ -127,7 +145,12 @@ const CourseDetail = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        enrollUser();
+                        if (tier === course.tier) {
+                          enrollUser();
+                        } else {
+                          toast.error("Plan not suitable for course tier.");
+                          navigate("/pricing");
+                        }
                       }}
                       className="btn bg-harvest_gold rounded-xl hover:bg-harvest_gold-600 hover:border:bg_harvest_gold-600"
                     >

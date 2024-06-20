@@ -39,8 +39,6 @@ const CustomCalendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(today);
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [addList, setAddlist] = useState("");
-  const [formOpen, setFormOpen] = useState<Boolean>(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Function to fetch and set the to-do list for the selected date
   const fetchTodoList = async (date: Date) => {
@@ -63,70 +61,6 @@ const CustomCalendar: React.FC = () => {
     }
   };
 
-  const addToDo = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(addList);
-    console.log(selectedDate);
-
-    const bodyRequest = {
-      title: addList,
-      date: selectedDate,
-    };
-
-    console.log(bodyRequest);
-
-    try {
-      const response = await fetch(
-        `${port}/api/user/todo/add/${user.user_._id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(bodyRequest),
-        }
-      );
-
-      const json = await response.json();
-
-      if (response.ok) {
-        console.log(json.message);
-        // Refresh the todo list after adding a new todo
-        fetchTodoList(selectedDate);
-        setAddlist("");
-      } else {
-        console.log(json.error);
-        setAddlist("");
-      }
-    } catch (error) {
-      console.log("ERROR");
-    }
-  };
-
-  const deleteToDo = async (taskId: string) => {
-    console.log("HELLO: ", taskId);
-
-    const response = await fetch(
-      `${port}/api/user/${user.user_._id}/todo/delete/${taskId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const json = response.json();
-
-    if (response.ok) {
-      console.log("OK");
-      console.log(json);
-      fetchTodoList(selectedDate);
-    } else {
-      console.log("ERROR");
-    }
-  };
-
   // Effect to fetch the to-do list when the selected date changes
   useEffect(() => {
     fetchTodoList(selectedDate);
@@ -138,7 +72,7 @@ const CustomCalendar: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full space-y-5">
       <div className="flex justify-center h-1/2">
         <div className="bg-white rounded-xl p-4 shadow-md w-full">
           <div className="flex justify-between mb-2">
@@ -196,71 +130,9 @@ const CustomCalendar: React.FC = () => {
       </div>
       <div className="h-1/2 w-full py-2">
         <div className="flex flex-col bg-poly-bg-yellow w-full h-full rounded-2xl shadow-md p-4">
-          <div className="flex flex-col bg-slate-50 w-full h-full rounded-xl shadow-xl p-4">
-            <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-harvest_gold-500">
-              <p>{selectedDate.toDateString()}</p>
-              <button
-                onClick={() => {
-                  setFormOpen(!formOpen);
-                }}
-              >
-                + Add to do
-              </button>
-            </h3>
-            <div className="h-full w-full overflow-y-scroll">
-              <ul>
-                {todoList.filter(
-                  (todo) =>
-                    todo.date.toDateString() === selectedDate.toDateString()
-                ).length > 0 ? (
-                  todoList
-                    .filter(
-                      (todo) =>
-                        todo.date.toDateString() === selectedDate.toDateString()
-                    )
-                    .map((todo, index) => (
-                      <li
-                        key={index}
-                        className="flex flex-row w-full justify-between hover:bg-gray-200 transition p-1"
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
-                      >
-                        {todo.title}
-                        {hoveredIndex === index && (
-                          <button
-                            onClick={() => {
-                              deleteToDo(todo._id);
-                            }}
-                            className="bg-gradient-to-b from-red-500 to-red-700 p-1 rounded-xl"
-                          >
-                            <span className="text-white font-semibold">
-                              <MdDeleteOutline />
-                            </span>
-                          </button>
-                        )}
-                      </li>
-                    ))
-                ) : (
-                  <p className="text-black font-normal mb-1">
-                    No to-dos for this date.
-                  </p>
-                )}
-              </ul>
-            </div>
-            {formOpen && (
-              <form onSubmit={addToDo} className="flex flex-row w-full">
-                <input
-                  type="text"
-                  placeholder="Input task"
-                  onChange={(e) => {
-                    setAddlist(e.target.value);
-                  }}
-                  value={addList}
-                  className="input border-[0.5px] border-harvest_gold h-6 px-2 w-full mt-2 bg-white"
-                />
-              </form>
-            )}
-          </div>
+          <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-white">
+            <p>{selectedDate.toDateString()}</p>
+          </h3>
         </div>
       </div>
     </div>

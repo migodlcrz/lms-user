@@ -91,7 +91,7 @@ const StorePage = () => {
           {courses ? (
             <>
               <div
-                className="flex flex-wrap h-full bg-poly-bg bg-cover w-full overflow-y-scroll p-3 content-start"
+                className="flex flex-wrap h-full justify-center bg-poly-bg bg-cover w-full overflow-y-scroll p-3 content-start"
                 style={{
                   scrollbarColor: "#030303 #ebf2ed",
                   scrollbarWidth: "thin",
@@ -125,7 +125,7 @@ const StorePage = () => {
                           onClick={() => {
                             navigate(`/store/course/${course._id}`);
                           }}
-                          className="w-72 h-72 rounded-xl shadow-xl m-1 bg-cover bg-center relative cursor-pointer"
+                          className="w-[500px] h-72 rounded-xl shadow-xl m-4 bg-cover bg-center relative cursor-pointer"
                           style={{
                             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 20%, transparent 50%), url(${Guy})`,
                           }}
@@ -134,19 +134,18 @@ const StorePage = () => {
                             <div className="flex flex-row items-center justify-between w-full">
                               <div
                                 className={`badge 
-                   ${
-                     course.tier === "Free" &&
-                     "bg-black text-white font-semibold"
-                   } 
-                   ${
-                     course.tier === "Basic" &&
-                     "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
-                   }
-                   ${
-                     course.tier === "Premium" &&
-                     "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold"
-                   }
-                 `}
+                                ${
+                                  course.tier === "Free" &&
+                                  "bg-black text-white font-semibold"
+                                } 
+                                ${
+                                  course.tier === "Basic" &&
+                                  "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
+                                }
+                                ${
+                                  course.tier === "Premium" &&
+                                  "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold"
+                                }`}
                               >
                                 <p>{course.tier}</p>
                               </div>

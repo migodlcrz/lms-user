@@ -42,7 +42,6 @@ const PriceCard: React.FC<PriceCardProps> = ({
       return toast.error(json.error);
     }
 
-    console.log("TIER: ", json.tier);
     setUserTier(json.tier);
   };
 
