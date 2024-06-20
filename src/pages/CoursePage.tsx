@@ -41,9 +41,7 @@ const DashboardPage = () => {
     try {
       const courses = await Promise.all(
         courseIds.map(async (courseId) => {
-          const response = await fetch(`${port}/api/course/${courseId}`, {
-            method: "GET",
-          });
+          const response = await fetch(`${port}/api/course/${courseId}`);
 
           if (!response.ok) {
             const json = await response.json();
@@ -56,6 +54,7 @@ const DashboardPage = () => {
 
       setUserCourses(courses);
     } catch (error) {
+      console.error("Failed to fetch courses:", error);
       toast.error("Failed to fetch courses.");
     }
   };

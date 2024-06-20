@@ -74,11 +74,6 @@ const PricingPage = () => {
     );
   }
 
-  // Guard clause: Render only when prices array is not empty
-  if (prices.length === 0) {
-    return <div>No prices available</div>; // Handle case where no prices are fetched
-  }
-
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
       <div className="flex flex-col h-full bg-poly-bg bg-center bg-cover z-0 px-14 py-10 space-y-5 items-center">
