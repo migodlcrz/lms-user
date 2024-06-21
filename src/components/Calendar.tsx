@@ -39,25 +39,91 @@ const CustomCalendar: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(today);
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [addList, setAddlist] = useState("");
+  const [formOpen, setFormOpen] = useState<Boolean>(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   // Function to fetch and set the to-do list for the selected date
   const fetchTodoList = async (date: Date) => {
-    console.log(user._id);
+    // console.log(user._id);
+    // try {
+    //   const response = await fetch(`${port}/api/user/todo/${user.user_._id}`);
+    //   if (!response.ok) {
+    //     throw new Error("Failed to fetch to-do list");
+    //   }
+    //   const data = await response.json();
+    //   // Convert dates to Date objects
+    //   const todosWithDates = data.todos.map((todo: any) => ({
+    //     ...todo,
+    //     date: new Date(todo.date),
+    //   }));
+    //   setTodoList(todosWithDates);
+    // } catch (error) {
+    //   console.error("Error fetching to-do list:", error);
+    //   setTodoList([]);
+    // }
+  };
+
+  const addToDo = async (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(addList);
+    console.log(selectedDate);
+
+    const bodyRequest = {
+      title: addList,
+      date: selectedDate,
+    };
+
+    console.log(bodyRequest);
+
     try {
-      const response = await fetch(`${port}/api/user/todo/${user.user_._id}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch to-do list");
+      const response = await fetch(
+        `${port}/api/user/todo/add/${user.user_._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bodyRequest),
+        }
+      );
+      console.log("PUMASOK");
+      const json = await response.json();
+
+      if (response.ok) {
+        console.log(json.message);
+        // Refresh the todo list after adding a new todo
+        fetchTodoList(selectedDate);
+        setAddlist("");
+      } else {
+        console.log(json.error);
+        setAddlist("");
       }
-      const data = await response.json();
-      // Convert dates to Date objects
-      const todosWithDates = data.todos.map((todo: any) => ({
-        ...todo,
-        date: new Date(todo.date),
-      }));
-      setTodoList(todosWithDates);
     } catch (error) {
-      console.error("Error fetching to-do list:", error);
-      setTodoList([]);
+      console.log("ERROR");
+    }
+  };
+
+  const deleteToDo = async (taskId: string) => {
+    console.log("HELLO: ", taskId);
+
+    const response = await fetch(
+      `${port}/api/user/${user.user_._id}/todo/delete/${taskId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = response.json();
+
+    if (response.ok) {
+      console.log("OK");
+      console.log(json);
+      fetchTodoList(selectedDate);
+    } else {
+      console.log("ERROR");
     }
   };
 
@@ -72,15 +138,15 @@ const CustomCalendar: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full space-y-5">
+    <div className="flex flex-col h-full">
       <div className="flex justify-center h-1/2">
-        <div className="bg-white rounded-xl p-4 shadow-md w-full">
+        <div className="w-full">
           <div className="flex justify-between mb-2">
             <h2 className="text-lg font-bold text-harvest_gold-600">
               {today.toLocaleString("default", { month: "long" })} {currentYear}
             </h2>
           </div>
-          <div className="grid grid-cols-7 gap-2">
+          <div className="grid grid-cols-7 gap-2 text-white">
             {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
               <div key={day} className="text-center font-bold">
                 {day}
@@ -102,7 +168,7 @@ const CustomCalendar: React.FC = () => {
               return (
                 <div
                   key={day}
-                  className={`flex justify-center text-center p-2 rounded-xl text-black font-semibold cursor-pointer transition ${
+                  className={`flex justify-center text-center p-2 rounded-xl text-white font-semibold cursor-pointer transition ${
                     day === currentDate
                       ? "shadow-lg bg-gradient-to-r from-harvest_gold-500 to-harvest_gold-600 font-bold"
                       : ""
@@ -129,10 +195,12 @@ const CustomCalendar: React.FC = () => {
         </div>
       </div>
       <div className="h-1/2 w-full py-2">
-        <div className="flex flex-col bg-poly-bg-yellow w-full h-full rounded-2xl shadow-md p-4">
-          <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-white">
-            <p>{selectedDate.toDateString()}</p>
-          </h3>
+        <div className="flex flex-col bg-poly-bg-yellow w-full h-full rounded-md shadow-md p-4">
+          <div className="flex flex-col w-full h-full rounded-xl shadow-xl p-4">
+            <h3 className="flex flex-row justify-between text-lg font-bold mb-2 text-white">
+              <p>{selectedDate.toDateString()}</p>
+            </h3>
+          </div>
         </div>
       </div>
     </div>

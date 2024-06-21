@@ -76,26 +76,22 @@ const PricingPage = () => {
 
   return (
     <div className="flex flex-col space-y-2 lg:space-y-0 h-screen w-full">
-      <div className="flex flex-col h-full bg-poly-bg bg-center bg-cover z-0 px-14 py-10 space-y-5 items-center">
-        <h1 className="font-black text-white">Pricing</h1>
-        <p className="text-white font-bold text-2xl">
-          Welcome to Learnify, where flexible, one-time payment plans make
-          learning simplified!
-        </p>
-        <div className="flex flex-row h-full w-full space-x-6">
+      <div className="flex flex-row h-full bg-raisin_black-300 z-0 px-14 py-10 space-x-2 items-center">
+        <div className="flex flex-col items-start justify-center w-1/2 h-full">
+          <h1 className="font-black text-harvest_gold">Choose your plan!</h1>
+          <p className="text-white font-semibold text-2xl">
+            Welcome to Learnify, where flexible, one-time payment plans make
+            learning simplified!
+          </p>
+        </div>
+        <div className="flex flex-col w-1/2 h-full space-y-2">
           {/* Render PriceCard components */}
           {prices.map((price, index) => (
             <PriceCard
               key={index}
               name={price.nickname}
               price={price.unit_amount}
-              description={
-                index === 0
-                  ? "Unlock your potential with our Free Plan. Gain access to a curated selection of introductory courses designed to give you a taste of what we offer. Perfect for beginners who want to explore new subjects without any commitment."
-                  : index === 1
-                  ? "Take your learning to the next level with our Basic Plan. Ideal for learners who want more comprehensive access to our courses. Enjoy a wider range of subjects with enhanced learning materials and resources."
-                  : "Maximize your learning experience with our Premium Plan. Perfect for dedicated learners seeking in-depth knowledge and advanced skills. Enjoy full access to our entire course catalog, including exclusive content and premium features."
-              }
+              description="Description"
               animationData={index === 0 ? free : index === 1 ? basic : premium}
               delay={index * 0.2 + 0.2}
               setLoading={setLoading}

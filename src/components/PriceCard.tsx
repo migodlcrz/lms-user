@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { User } from "../interfaces/UserInterface";
 import { toast } from "react-toastify";
+import { FaPerson } from "react-icons/fa6";
+import { FaDotCircle } from "react-icons/fa";
 
 interface PriceCardProps {
   name: string;
@@ -61,102 +63,81 @@ const PriceCard: React.FC<PriceCardProps> = ({
           delay: delay,
         },
       }}
-      className={`flex flex-col w-1/3 h-full rounded-2xl px-8 py-7 ${
+      className={`flex flex-row w-full h-1/3 rounded-md p-5 ${
         userTier === name
-          ? "border-harvest_gold-400 border-8 bg-yellow-200"
-          : " bg-white"
+          ? "bg-gradient-to-tl from-[#eca40050] to-harvest_gold-700"
+          : " bg-gradient-to-tl from-[#201c2100] to-raisin_black-500"
       }`}
     >
-      <div className="flex flex-col items-center w-full h-1/2">
-        <h1 className="text-black text-3xl">{name} Plan</h1>
+      <div className="flex flex-col w-1/3 h-full ">
+        <div className="flex flex-row items-start w-full h-1/2 space-x-3">
+          <div className="flex items-center justify-center font-bold text-harvest_gold-800 text-2xl w-10 h-10 bg-harvest_gold-400 rounded-full">
+            {name === "Free" && "F"}
+            {name === "Basic" && "B"}
+            {name === "Premium" && "P"}
+          </div>
+          <h1 className="text-white text-3xl">{name}</h1>
+        </div>
+        <span className="text-white font-bold text-5xl">
+          <div>
+            <span className="text-white font-bold text-5xl">
+              {!price ? "Starting Plan" : (price / 100).toFixed(2)}
+            </span>
 
-        <Lottie className="h-[80%] p-10" animationData={animationData} />
-      </div>
-      <div className="">
-        <span className="text-black font-bold text-5xl">
-          {!price ? "Free" : (price / 100).toFixed(2)}
+            <span className="text-white font-bold text-xl">
+              {!!price && "USD"}
+            </span>
+          </div>
         </span>
-
-        <span className="text-black font-bold text-xl">{!!price && "USD"}</span>
-      </div>
-      <div className=" border-b-[0.5px] border-black w-full py-2">
-        {userTier === "Free" &&
-          (name === "Free" ? (
-            <div className="btn w-full bg-white text-black font-bold text-xl hover:bg-white hover:border-white border-white cursor-auto">
-              Activated
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                setLoading(true);
-                getSession();
-              }}
-              className="btn w-full bg-harvest_gold text-black font-bold text-xl"
-            >
-              Subscribe
-            </button>
-          ))}
-        {userTier === "Basic" &&
-          (name === "Free" ? (
-            <div className="btn w-full bg-harvest_gold text-black font-bold text-xl hover:bg-harvest_gold hover:border-harvest_gold border-harvest_gold cursor-auto">
-              Upgraded
-            </div>
-          ) : name === "Basic" ? (
-            <div className="btn w-full bg-white text-black font-bold text-xl hover:bg-white hover:border-white border-white cursor-auto">
-              Activated
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                setLoading(true);
-                getSession();
-              }}
-              className="btn w-full bg-harvest_gold text-black font-bold text-xl"
-            >
-              Subscribe
-            </button>
-          ))}
-        {userTier === "Premium" &&
-          (name === "Premium" ? (
-            <div className="btn w-full bg-white text-black font-bold text-xl hover:bg-white hover:border-white border-white cursor-auto">
-              Activated
-            </div>
-          ) : (
-            <div className="btn w-full bg-harvest_gold text-black font-bold text-xl hover:bg-harvest_gold hover:border-harvest_gold border-harvest_gold cursor-auto">
-              Upgraded
-            </div>
-          ))}
-        {/* {userTier === "Premium" && name !== "Premium" ? (
-          <div className="btn w-full bg-harvest_gold text-black font-bold text-xl hover:bg-harvest_gold hover:border-harvest_gold border-harvest_gold cursor-auto">
-            Upgraded
-          </div>
-        ) : (
-          <div className="btn w-full bg-white text-black font-bold text-xl hover:bg-white hover:border-white border-white cursor-auto">
-            Activated
-          </div>
-        )} */}
-
-        {/* <div className="btn w-full bg-white text-black font-bold text-xl hover:bg-white hover:border-white border-white cursor-auto">
-          Activated
+        <div className=" w-full py-2">
+          {userTier === "Free" &&
+            (name === "Free" ? (
+              <div className="text-white font-bold text-xl">Current Plan</div>
+            ) : (
+              <button
+                onClick={() => {
+                  setLoading(true);
+                  getSession();
+                }}
+                className="btn w-full bg-harvest_gold text-black font-bold text-xl"
+              >
+                Subscribe
+              </button>
+            ))}
+          {userTier === "Basic" &&
+            (name === "Free" ? (
+              <div className="text-harvest_gold font-bold text-xl">
+                Upgraded
+              </div>
+            ) : name === "Basic" ? (
+              <div className="text-white font-bold text-xl">Current Plan</div>
+            ) : (
+              <button
+                onClick={() => {
+                  setLoading(true);
+                  getSession();
+                }}
+                className="text-harvest_gold font-bold text-xl hover:text-white transition-colors"
+              >
+                Subscribe
+              </button>
+            ))}
+          {userTier === "Premium" &&
+            (name === "Premium" ? (
+              <div className="text-white font-bold text-xl">Current Plan</div>
+            ) : (
+              <div className="text-harvest_gold font-bold text-xl">
+                Upgraded
+              </div>
+            ))}
         </div>
-        <div className="btn w-full bg-harvest_gold text-black font-bold text-xl hover:bg-harvest_gold hover:border-harvest_gold border-harvest_gold cursor-auto">
-          Upgraded
-        </div>
-        <button
-          onClick={() => {
-            setLoading(true);
-            getSession();
-          }}
-          className="btn w-full bg-harvest_gold text-black font-bold text-xl"
-        >
-          Subscribe
-        </button> */}
       </div>
-      <div className="flex flex-col justify-between w-full h-1/2 py-3">
-        <div className="flex flex-col space-y-5 items-start w-full">
-          <h3 className="flex items-center justify-center font-semibold text-black text-justify">
-            {description}
-          </h3>
+      <div className="flex flex-col w-2/3 h-full">
+        <div className="flex flex-row items-center space-x-3 text-white text-2xl font-semibold">
+          <span className="text-harvest_gold text-xs">
+            <FaDotCircle />
+          </span>{" "}
+          <span>100 Courses</span>
         </div>
       </div>
     </motion.div>

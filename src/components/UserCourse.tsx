@@ -64,33 +64,33 @@ const UserCourse = () => {
   }, []);
 
   return (
-    <div className="flex flex-row space-x-6 bg-poly-bg-yellow w-screen h-screen bg-center bg-cover p-6">
+    <div className="flex flex-row space-x-2 bg-raisin_black-300 w-screen h-screen p-6">
       <motion.div
         initial={{ opacity: 0, x: 30 }}
         animate={{
           opacity: 1,
           x: 0,
         }}
-        className="flex flex-col w-1/4 h-full rounded-xl bg-white p-3"
+        className="flex flex-col w-1/4 h-full space-y-3 rounded-md bg-gradient-to-r from-raisin_black-500 to-raisin_black-400 p-3"
       >
         <button
           onClick={() => {
             navigate("/courses");
           }}
-          className="text-3xl text-black hover:text-harvest_gold transition-color duration-200"
+          className="text-3xl text-harvest_gold hover:text-harvest_gold transition-color duration-200"
         >
           <IoArrowBack />
         </button>
         <img
           src={Guy}
-          className="w-full h-96 object-cover object-center"
+          className="w-full h-96 object-cover object-center rounded-md"
           alt="Pic"
         />
-        <div className="text-black font-bold">
-          Name: {course && course.courseName}
+        <div className="text-harvest_gold font-bold text-3xl text-center">
+          {course && course.courseName}
         </div>
-        <div className="text-black font-bold">
-          Description: {course && course.description}
+        <div className="text-white font-semibold">
+          {course && course.description}
         </div>
         <button
           onClick={() => {
@@ -107,10 +107,12 @@ const UserCourse = () => {
           opacity: 1,
           x: 0,
         }}
-        className="flex flex-col w-3/4 h-full rounded-xl bg-white p-3"
+        className="flex flex-col w-3/4 h-full rounded-md bg-gradient-to-r from-raisin_black-500 to-raisin_black-400 p-3"
       >
-        <h1 className="text-4xl">Modules</h1>
-        <div className="w-full h-full">Module 1, Module 2, Module 3</div>
+        <h1 className="text-4xl text-white">Modules</h1>
+        <div className="w-full h-full text-white">
+          Module 1, Module 2, Module 3
+        </div>
       </motion.div>
     </div>
   );

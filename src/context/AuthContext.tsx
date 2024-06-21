@@ -107,6 +107,7 @@ export const AuthContextProvider: FC<AuthContextProviderProps> = ({
 
   useEffect(() => {
     if (state.user) {
+      console.log("NAGCHECK");
       checkTier();
     }
   }, [state]);

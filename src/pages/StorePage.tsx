@@ -41,7 +41,7 @@ const StorePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen w-full bg-poly-bg bg-center bg-cover">
+    <div className="flex flex-col h-screen w-full bg-raisin_black-300 bg-cover">
       <div className="flex flex-col w-full h-full">
         <motion.div
           initial={{ opacity: 0 }}
@@ -91,7 +91,7 @@ const StorePage = () => {
           {courses ? (
             <>
               <div
-                className="flex flex-wrap h-full justify-center bg-poly-bg bg-cover w-full overflow-y-scroll p-3 content-start"
+                className="flex flex-wrap h-full justify-center bg-raisin_black-300 w-full overflow-y-scroll p-3 content-start"
                 style={{
                   scrollbarColor: "#030303 #ebf2ed",
                   scrollbarWidth: "thin",
@@ -125,34 +125,44 @@ const StorePage = () => {
                           onClick={() => {
                             navigate(`/store/course/${course._id}`);
                           }}
-                          className="w-[500px] h-72 rounded-xl shadow-xl m-4 bg-cover bg-center relative cursor-pointer"
-                          style={{
-                            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.5) 20%, transparent 50%), url(${Guy})`,
-                          }}
+                          className="flex flex-row w-[500px] h-72 rounded-md shadow-xl m-2 relative cursor-pointer bg-gradient-to-r from-raisin_black-500 to-raisin_black-400"
                         >
-                          <div className="flex flex-col justify-between items-center bg-transparent h-full w-full p-3">
+                          <div className="flex flex-col justify-between items-center bg-transparent h-full w-1/2 p-3">
                             <div className="flex flex-row items-center justify-between w-full">
-                              <div
-                                className={`badge 
-                                ${
-                                  course.tier === "Free" &&
-                                  "bg-black text-white font-semibold"
-                                } 
-                                ${
-                                  course.tier === "Basic" &&
-                                  "bg-gradient-to-r from-harvest_gold-400 via-harvest_gold-600 to-harvest_gold-800 text-black font-semibold"
-                                }
-                                ${
-                                  course.tier === "Premium" &&
-                                  "bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-400 shadow-lg text-black font-semibold"
-                                }`}
-                              >
-                                <p>{course.tier}</p>
+                              <div>
+                                {course.tier === "Free" && (
+                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                      F
+                                    </div>
+                                  </p>
+                                )}
+                                {course.tier === "Basic" && (
+                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                      B
+                                    </div>
+                                  </p>
+                                )}
+                                {course.tier === "Premium" && (
+                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                      P
+                                    </div>
+                                  </p>
+                                )}
                               </div>
                               <h2 className="text-white font-bold truncate text-xl">
                                 {course.courseName}
                               </h2>
                             </div>
+                          </div>
+                          <div className="w-1/2 h-full object-cover object-center">
+                            <img
+                              src={Guy}
+                              alt=""
+                              className="w-full h-full object-cover"
+                            />
                           </div>
                           {hoveredCourseIndex === index && (
                             <motion.div
