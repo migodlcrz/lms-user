@@ -128,40 +128,45 @@ const StorePage = () => {
                           className="flex flex-row w-[500px] h-72 rounded-md shadow-xl m-2 relative cursor-pointer bg-gradient-to-r from-raisin_black-500 to-raisin_black-400"
                         >
                           <div className="flex flex-col justify-between items-center bg-transparent h-full w-1/2 p-3">
-                            <div className="flex flex-row items-center justify-between w-full">
-                              <div>
-                                {course.tier === "Free" && (
-                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
-                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
-                                      F
-                                    </div>
-                                  </p>
-                                )}
-                                {course.tier === "Basic" && (
-                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
-                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
-                                      B
-                                    </div>
-                                  </p>
-                                )}
-                                {course.tier === "Premium" && (
-                                  <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
-                                    <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
-                                      P
-                                    </div>
-                                  </p>
-                                )}
+                            <div className="flex flex-col items-center justify-between w-full">
+                              <div className="w-full flex flex-row justify-between">
+                                <h2 className="text-white font-bold truncate text-xl">
+                                  {course.courseName}
+                                </h2>
+                                <div>
+                                  {course.tier === "Free" && (
+                                    <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                      <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                        F
+                                      </div>
+                                    </p>
+                                  )}
+                                  {course.tier === "Basic" && (
+                                    <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                      <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                        B
+                                      </div>
+                                    </p>
+                                  )}
+                                  {course.tier === "Premium" && (
+                                    <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+                                      <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                                        P
+                                      </div>
+                                    </p>
+                                  )}
+                                </div>
                               </div>
-                              <h2 className="text-white font-bold truncate text-xl">
-                                {course.courseName}
-                              </h2>
+                              <div className="w-full h-full text-white">
+                                {course.description}
+                              </div>
                             </div>
                           </div>
                           <div className="w-1/2 h-full object-cover object-center">
                             <img
                               src={Guy}
                               alt=""
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover rounded-r-md"
                             />
                           </div>
                           {hoveredCourseIndex === index && (
