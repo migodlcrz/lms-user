@@ -15,6 +15,19 @@ const UserCourse = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [page, setPage] = useState("Modules");
 
+  const modules = [
+    "Module 1: Introduction to Programming",
+    "Module 2: Basics of HTML",
+    "Module 3: CSS Fundamentals",
+    "Module 4: JavaScript Basics",
+    "Module 5: Advanced JavaScript",
+    "Module 6: React Introduction",
+    "Module 7: React Hooks",
+    "Module 8: State Management",
+    "Module 9: Building Applications",
+    "Module 10: Deployment",
+  ];
+
   const fetchCourse = async () => {
     const response = await fetch(`${port}/api/course/${courseId}`, {
       method: "GET",
@@ -107,12 +120,19 @@ const UserCourse = () => {
           opacity: 1,
           x: 0,
         }}
-        className="flex flex-col w-3/4 h-full rounded-md bg-gradient-to-r from-raisin_black-500 to-raisin_black-400 p-3"
+        className="flex flex-col w-3/4 h-full bg-gradient-to-r from-raisin_black-500 to-raisin_black-400 rounded-md p-3"
       >
-        <h1 className="text-4xl text-white">Modules</h1>
-        <div className="w-full h-full text-white">
-          Module 1, Module 2, Module 3
-        </div>
+        <h1 className="text-4xl text-white ">Modules</h1>
+        {modules.map((module, index) => (
+          <div className="flex flex-row w-full p-2 space-x-2 items-center border-b-[0.5px] border-raisin_black-600">
+            <p className="flex flex-row items-center text-sm font-semibold text-white space-x-2">
+              <div className="flex items-center justify-center text-harvest_gold-800 text-sm w-7 h-7 bg-harvest_gold-400 rounded-full">
+                {index + 1}
+              </div>
+            </p>
+            <h3 className="text-white font-bold py-3">{module}</h3>
+          </div>
+        ))}
       </motion.div>
     </div>
   );
