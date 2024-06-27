@@ -26,7 +26,7 @@ const Sidebar = () => {
   return (
     <div className="sticky flex top-0 h-screen z-50">
       <div
-        onMouseEnter={() => toggleSidebar()}
+        // onMouseEnter={() => toggleSidebar()}
         // onMouseLeave={() => toggleSidebar()}
         onClick={() => toggleSidebar()}
         className={`flex items-start transition-all h-full duration-300 bg-raisin_black-300 border-r-[0.1px] border-raisin_black-600 z-50 cursor-pointer ${

@@ -145,11 +145,28 @@ const CourseDetail = () => {
                   ) : (
                     <button
                       onClick={() => {
-                        if (tier === course.tier) {
+                        if (tier === "Free") {
+                          if (tier === course.tier) {
+                            enrollUser();
+                          } else {
+                            toast.error("Plan not suitable for course tier.");
+                            navigate("/pricing");
+                          }
+                        }
+
+                        if (tier == "Basic") {
+                          if (
+                            course.tier === "Basic" ||
+                            course.tier === "Free"
+                          ) {
+                            enrollUser();
+                          } else {
+                            toast.error("Plan not suitable for course tier.");
+                            navigate("/pricing");
+                          }
+                        }
+                        if (tier == "Premium") {
                           enrollUser();
-                        } else {
-                          toast.error("Plan not suitable for course tier.");
-                          navigate("/pricing");
                         }
                       }}
                       className="btn bg-harvest_gold rounded-xl hover:bg-harvest_gold-600 hover:border:bg_harvest_gold-600"
